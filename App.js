@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native'
+import SongContainer from './src/components/SongContainer'
 
 // export default function App() {
 //   return (
@@ -16,6 +17,7 @@ class App extends React.Component {
     return (
       <View style={styles.container}>
         <Text>Changed App.js to class component structure!</Text>
+        <SongContainer />
       </View>
     )
   }
