@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, StyleSheet, StatusBar, Pressable, Alert } from 'react-native'
+import { Text, View, StyleSheet, StatusBar, Pressable, Alert, Modal } from 'react-native'
 import { Icon, Button } from 'react-native-elements'
 // import { Modal } from 'react-native-web'
 // import Modal from 'modal-react-native-web';
@@ -13,7 +13,7 @@ class SongContainer extends React.Component {
         songs: [],
         testCount: 0,
         newSongFormVisible: true,
-        modalVisible: false,
+        modalAddToListVisible: false,
         showSongList: true,
         showNewSongForm: false
     }
@@ -63,17 +63,18 @@ class SongContainer extends React.Component {
 
     setModalVisible(visible) {
         console.log('setModalVisible activated')
-        Alert.alert("setModalVisible activated")
+        // Alert.alert("setModalVisible activated")
         this.setState({
-            modalVisible: visible
+            modalAddToListVisible: visible
         })
     }
 
     onPressAddToList() {
-        this.setState({
-            showNewSongForm: true,
-            showSongList: false
-        })
+        this.setModalVisible(false)
+        // this.setState({
+        //     showNewSongForm: true,
+        //     showSongList: false
+        // })
     }
 
 
@@ -82,25 +83,35 @@ class SongContainer extends React.Component {
             <View style={styles.container}>
                 {/* <Text>SongContainer Component is here!</Text>
                 <Text>testCount = { this.state.testCount }</Text> */}
-                {/* <Modal
+                <Modal
                     animationType="slide"
                     transparent={false}
-                    visible={ this.state.modalVisible }
+                    visible={ this.state.modalAddToListVisible }
                     onRequestClose={() => {
                         Alert.alert("Modal has been closed.");
-                        this.setModalVisible(!this.state.modalVisible);
+                        this.setModalVisible(!this.state.modalAddToListVisible);
                       }}
                 >
                     <View style={styles.modalView}>
-                        <Text>Hello World!</Text>
+                        {/* <Text>Hello World!</Text>
                         <Pressable
                             style={[styles.button, styles.buttonClose]}
                             onPress={() => this.setModalVisible(false)}
                         >
                             <Text>Hide Modal</Text>
-                        </Pressable>
+                        </Pressable> */}
+                        <NewSongForm
+                            setModalVisible= { this.setModalVisible.bind(this) }
+                            // onPressAddToList = { this.onPressAddToList }
+                        />
                     </View>
-                </Modal> */}
+                </Modal>
+                {/* <Pressable
+                    style={[styles.button, styles.buttonOpen]}
+                    onPress={() => this.setModalVisible(true)}
+                >
+                    <Text style={styles.textStyle}>Show Modal</Text>
+                </Pressable> */}
                 {
                     this.state.showSongList &&
                     <SongList
@@ -122,7 +133,8 @@ class SongContainer extends React.Component {
                     }
                     title="  Add to List"
                     onPress={ () => {  
-                        Alert.alert("Add to List?") 
+                        // Alert.alert("Add to List?") 
+                        this.setModalVisible(true)
                         console.log("Add to List?")
                         }
                     }

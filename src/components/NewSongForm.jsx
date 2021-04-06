@@ -4,19 +4,19 @@ import { Overlay, Input, Text, Card, Button, Icon } from 'react-native-elements'
 import { Modal } from 'react-native-web'
 
 class NewSongForm extends React.Component {
+    onPressAddToList() {
+        this.props.setModalVisible(false)
+        // this.setState({
+        //     showNewSongForm: true,
+        //     showSongList: false
+        // })
+    }
     render () {
         return (
-            <View style={styles.container}>
-                {/* <Overlay
-                    isVisible={ this.props.visible }
-                    ModalComponent={ Modal }
-                > */}
-                    {/* <Text>Hello World</Text> */}
-                {/* </Overlay> */}
-                {/* <Text h4>Add New Song</Text> */}
-                <Card>
-                    <Card.Title>Add New Song</Card.Title>
-                    <Input
+            <View>
+                {/* <Card style={{ width:'100%' }}> */}
+                    {/* <Card.Title>Add New Song</Card.Title> */}
+                    {/* <Input
                         placeholder='title'
                     />
                     <Input
@@ -25,6 +25,9 @@ class NewSongForm extends React.Component {
                     <Input
                         placeholder='song code'
                     />
+                    <Input
+                        placeholder='image URL'
+                    /> */}
                     <Button
                         type='clear'
                         icon={
@@ -36,12 +39,13 @@ class NewSongForm extends React.Component {
                         }
                         title="  Submit"
                         onPress={ () => {  
-                            Alert.alert("Add to List?") 
-                            console.log("Add to List?")
+                            // Alert.alert("Add to List?") 
+                            // console.log("Add to List?")
+                            this.onPressAddToList()
                             }
                         }
                     />
-                </Card>
+                {/* </Card> */}
             </View>
         )
     }
@@ -50,7 +54,7 @@ class NewSongForm extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: StatusBar.currentHeight || 0,
+        // marginTop: StatusBar.currentHeight || 0,
     }
 })
 
