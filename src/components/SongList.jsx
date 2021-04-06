@@ -1,15 +1,13 @@
 import React from 'react'
-import { FlatList, SafeAreaView, StyleSheet, StatusBar, View, Text, TouchableHighlight, Image } from 'react-native'
-import { Icon, Card, ListItem } from 'react-native-elements'
+import { FlatList, SafeAreaView, StyleSheet, StatusBar, View, Text, TouchableHighlight, Image, Alert, ScrollView } from 'react-native'
+import { Icon, Card, ListItem, Button } from 'react-native-elements'
 
 class SongList extends React.Component {
-    // renderItem(item) {
-    //     <Item title={ item.title } />
-    // }
 
     render () {
         return (
-            <SafeAreaView style={styles.container}>
+            <View style={styles.container}>
+                {/* <ScrollView> */}
                 { this.props.songs.map( song => {
                     return (
                         <ListItem key={song.id} bottomDivider>
@@ -17,10 +15,6 @@ class SongList extends React.Component {
                                 source={{uri: song.image}} 
                                 style={{width: 50, height: 50}} 
                             />
-                            {/* <ListItem.Content>
-                                <ListItem.Title>{song.title}</ListItem.Title>
-                                <ListItem.SubTitle>{song.artist}</ListItem.SubTitle>
-                            </ListItem.Content> */}
                             <ListItem.Content>
                                 <ListItem.Title>{ song.title }</ListItem.Title>
                                 <ListItem.Subtitle>{ song.artist }</ListItem.Subtitle>
@@ -37,7 +31,47 @@ class SongList extends React.Component {
                         </ListItem>
                     )
                 })}
-            </SafeAreaView>
+                {/* </ScrollView> */}
+                {/* <FlatList
+                    data={ this.props.songs }
+                    renderItem={ ({ item }) => (
+                        <ListItem key={item.id} bottomDivider>
+                            <Image 
+                                source={{uri: item.image}} 
+                                style={{width: 50, height: 50}} 
+                            />
+                            <ListItem.Content>
+                                <ListItem.Title>{ item.title }</ListItem.Title>
+                                <ListItem.Subtitle>{ item.artist }</ListItem.Subtitle>
+                                <ListItem.Subtitle>{ item.song_code }</ListItem.Subtitle>
+                            </ListItem.Content>
+                            <Icon 
+                                name='edit'
+                                type='font-awesome'
+                            />
+                            <Icon 
+                                name='trash-o'
+                                type='font-awesome'
+                            />
+                        </ListItem> 
+                    )}
+                /> */}
+                {/* <Button
+                    icon={
+                        <Icon 
+                            name='add-to-list'
+                            type='entypo'
+                            color='white'
+                        />
+                    }
+                    title="  Add to List"
+                    onPress={ () => {  
+                        Alert.alert("Add to List?") 
+                        console.log("Add to List?")
+                        }
+                    }
+                /> */}
+            </View>
         )
     }
 }
@@ -45,13 +79,19 @@ class SongList extends React.Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
+      width: '100%',
       marginTop: StatusBar.currentHeight || 0,
+    //   backgroundColor: 'red',
+      
     },
     item: {
-      backgroundColor: '#f9c2ff',
-      padding: 20,
-      marginVertical: 8,
-      marginHorizontal: 16,
+        width: '100%',
+        // backgroundColor: 'red'
+        // flex: 1,
+    //   backgroundColor: '#f9c2ff',
+    //   padding: 20,
+    //   marginVertical: 8,
+    //   marginHorizontal: 16,
     },
     title: {
       fontSize: 32,

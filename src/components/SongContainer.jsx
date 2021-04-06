@@ -1,7 +1,7 @@
 import React from 'react'
-import { Text, View, StyleSheet, Pressable, Alert } from 'react-native'
+import { Text, View, StyleSheet, StatusBar, Pressable, Alert } from 'react-native'
 import { Icon, Button } from 'react-native-elements'
-import { Modal } from 'react-native-web'
+// import { Modal } from 'react-native-web'
 // import Modal from 'modal-react-native-web';
 import SongList from './SongList'
 import NewSongForm from './NewSongForm'
@@ -13,35 +13,52 @@ class SongContainer extends React.Component {
         songs: [],
         testCount: 0,
         newSongFormVisible: true,
-        modalVisible: false
+        modalVisible: false,
+        showSongList: true,
+        showNewSongForm: false
     }
 
     componentDidMount () {
         this.getSongs()
     }
 
-    getSongs() {
-        fetch(baseURL + '/', {
-            method: 'GET',
-        })
-            .then(data => {
-                return data.json()
-            }, err => console.log(err))
-            .then(parsedData => {
-                console.log(`parsedData ${parsedData.data}`)
-                this.setState({
-                    songs: parsedData.data,
-                    testCount: this.state.testCount + 1,
-                    modalVisible: false
-                })
-            }, err => console.log(err))
-            .then( () => {
-                console.log(this.state.songs)
+    async getSongs() {
+        // fetch(baseURL + '/', {
+        //     method: 'GET',
+        // })
+        //     .then(data => {
+        //         return data.json()
+        //     }, err => console.log(err))
+        //     .then(parsedData => {
+        //         console.log(`parsedData ${parsedData.data}`)
+        //         this.setState({
+        //             songs: parsedData.data,
+        //             testCount: this.state.testCount + 1,
+        //             modalVisible: false
+        //         })
+        //     }, err => console.log(err))
+        //     .then( () => {
+        //         console.log(this.state.songs)
+        //     })
+        //     .catch( () => {
+        //         console.log('getSongs error')
+        //         Alert.alert('getSongs error')
+        //     })
+        try {
+            const response = await fetch(baseURL + '/', {
+                method: 'GET'
             })
-            .catch( () => {
-                console.log('getSongs error')
-                Alert.alert('getSongs error')
+            const json = await response.json()
+            this.setState({
+                songs: json.data,
+                testCount: this.state.testCount + 1,
+                modalVisible: false
             })
+        } catch (err) {
+            console.log(err)
+            Alert.alert('getSongs error')
+        }
+
     }
 
     setModalVisible(visible) {
@@ -52,10 +69,17 @@ class SongContainer extends React.Component {
         })
     }
 
+    onPressAddToList() {
+        this.setState({
+            showNewSongForm: true,
+            showSongList: false
+        })
+    }
+
 
     render () {
         return (
-            <View style={styles.centeredView}>
+            <View style={styles.container}>
                 {/* <Text>SongContainer Component is here!</Text>
                 <Text>testCount = { this.state.testCount }</Text> */}
                 {/* <Modal
@@ -77,9 +101,17 @@ class SongContainer extends React.Component {
                         </Pressable>
                     </View>
                 </Modal> */}
-                <SongList
-                    songs = { this.state.songs }
-                />
+                {
+                    this.state.showSongList &&
+                    <SongList
+                        songs = { this.state.songs }
+                        onPressAddToList = { this.onPressAddToList }
+                    />
+                }
+                {
+                    this.state.showNewSongForm &&
+                    <NewSongForm />
+                }
                 <Button
                     icon={
                         <Icon 
@@ -89,6 +121,11 @@ class SongContainer extends React.Component {
                         />
                     }
                     title="  Add to List"
+                    onPress={ () => {  
+                        Alert.alert("Add to List?") 
+                        console.log("Add to List?")
+                        }
+                    }
                 />
                 {/* {
                     this.state.newSongFormVisible &&
@@ -114,11 +151,17 @@ class SongContainer extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        // marginTop: StatusBar.currentHeight || 0,
+        alignItems:"stretch",
+        width:'100%'
+    },
     centeredView: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 22
+        marginTop: 22,
       },
     modalView: {
         margin: 20,
