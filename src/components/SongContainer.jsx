@@ -9,13 +9,17 @@ import NewSongForm from './NewSongForm'
 let baseURL = 'http://localhost:8000/api/v1/songs'
 
 class SongContainer extends React.Component {
-    state = {
-        songs: [],
-        testCount: 0,
-        newSongFormVisible: true,
-        modalAddToListVisible: false,
-        showSongList: true,
-        showNewSongForm: false
+    constructor(props) {
+        super(props)
+        this.state = {
+            songs: [],
+            testCount: 0,
+            newSongFormVisible: true,
+            modalAddToListVisible: false,
+            showSongList: true,
+            showNewSongForm: false
+        }
+        this.setModalVisible = this.setModalVisible.bind(this)
     }
 
     componentDidMount () {
@@ -101,7 +105,7 @@ class SongContainer extends React.Component {
                             <Text>Hide Modal</Text>
                         </Pressable> */}
                         <NewSongForm
-                            setModalVisible= { this.setModalVisible.bind(this) }
+                            setModalVisible= { this.setModalVisible }
                             // onPressAddToList = { this.onPressAddToList }
                         />
                     </View>
