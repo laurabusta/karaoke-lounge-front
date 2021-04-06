@@ -1,5 +1,6 @@
 import React from 'react'
-import { FlatList, SafeAreaView, StyleSheet, StatusBar, View, Text, TouchableHighlight } from 'react-native'
+import { FlatList, SafeAreaView, StyleSheet, StatusBar, View, Text, TouchableHighlight, Image } from 'react-native'
+import { Icon, Card, ListItem } from 'react-native-elements'
 
 class SongList extends React.Component {
     // renderItem(item) {
@@ -9,37 +10,34 @@ class SongList extends React.Component {
     render () {
         return (
             <SafeAreaView style={styles.container}>
-                <FlatList
-                    data={ this.props.songs }
-                    renderItem={ ( {item, index, separators} ) => (
-                        <TouchableHighlight
-                            key={item.id}>
-                            <View style={styles.item}>
-                                <Text>"{ item.title }" by { item.artist }</Text>
-                                <Text>{ item.genre }</Text>
-                            </View>
-                        </TouchableHighlight>
-
-                    )}
-                />
+                { this.props.songs.map( song => {
+                    return (
+                        <ListItem key={song.id} bottomDivider>
+                            <Image 
+                                source={{uri: song.image}} 
+                                style={{width: 50, height: 50}} 
+                            />
+                            {/* <ListItem.Content>
+                                <ListItem.Title>{song.title}</ListItem.Title>
+                                <ListItem.SubTitle>{song.artist}</ListItem.SubTitle>
+                            </ListItem.Content> */}
+                            <ListItem.Content>
+                                <ListItem.Title>{ song.title }</ListItem.Title>
+                                <ListItem.Subtitle>{ song.artist }</ListItem.Subtitle>
+                                <ListItem.Subtitle>{ song.song_code }</ListItem.Subtitle>
+                            </ListItem.Content>
+                            <Icon 
+                                name='edit'
+                                type='font-awesome'
+                            />
+                            <Icon 
+                                name='trash-o'
+                                type='font-awesome'
+                            />
+                        </ListItem>
+                    )
+                })}
             </SafeAreaView>
-            // <div>
-            //     <h3>Song List</h3>
-            //     <table>
-            //         <tbody>
-            //             { this.props.songs.map(song => {
-            //                 return (
-            //                     <tr key={ song.id }>
-            //                         <td>{ song.title }</td>
-            //                         <td>{ song.artist }</td>
-            //                         <td>{ song.genre }</td>
-            //                         { console.log(song) }
-            //                     </tr>                                
-            //                 )                            
-            //             })}
-            //         </tbody>
-            //     </table>
-            // </div>
         )
     }
 }
