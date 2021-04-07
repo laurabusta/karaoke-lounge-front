@@ -7,6 +7,9 @@ class SongList extends React.Component {
     render () {
         return (
             <View style={styles.container}>
+                <View style={styles.sectionHeaderContainer}>
+                    <Text style={styles.sectionHeader}>Karaoke Playlist</Text>
+                </View>
                 {/* <ScrollView> */}
                 { this.props.songs.map( song => {
                     return (
@@ -58,21 +61,6 @@ class SongList extends React.Component {
                         </ListItem> 
                     )}
                 /> */}
-                {/* <Button
-                    icon={
-                        <Icon 
-                            name='add-to-list'
-                            type='entypo'
-                            color='white'
-                        />
-                    }
-                    title="  Add to List"
-                    onPress={ () => {  
-                        Alert.alert("Add to List?") 
-                        console.log("Add to List?")
-                        }
-                    }
-                /> */}
             </View>
         )
     }
@@ -98,6 +86,17 @@ const styles = StyleSheet.create({
     title: {
       fontSize: 32,
     },
+    sectionHeader: {
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+    sectionHeaderContainer: {
+        marginTop: 15,
+        paddingLeft: 13,
+        // padding: 5,
+        // alignItems: 'center',
+        justifyContent: 'center',
+    }
   });
 
 export default SongList

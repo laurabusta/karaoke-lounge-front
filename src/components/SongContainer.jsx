@@ -199,22 +199,25 @@ class SongContainer extends React.Component {
                 }
 
                 {/* Add to List Button */}
-                <Button
-                    icon={
-                        <Icon 
-                            name='add-to-list'
-                            type='entypo'
-                            color='white'
-                        />
-                    }
-                    title="  Add to List"
-                    onPress={ () => {  
-                        // Alert.alert("Add to List?") 
-                        this.setModalVisible(true)
-                        console.log("Add to List?")
+                <View style={ styles.addButtonContainer }>
+                    <Button
+                        icon={
+                            <Icon 
+                                name='add-to-list'
+                                type='entypo'
+                                color='white'
+                            />
                         }
-                    }
-                />
+                        title="  Add to List"
+                        onPress={ () => {  
+                            // Alert.alert("Add to List?") 
+                            this.setModalVisible(true)
+                            console.log("Add to List?")
+                            }
+                        }
+                    />
+                </View>
+
 
             </View>
         )
@@ -225,7 +228,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         // marginTop: StatusBar.currentHeight || 0,
-        alignItems:"stretch",
+        alignItems:"center",
+        justifyContent: "flex-start",
         width:'100%'
     },
     centeredView: {
@@ -252,7 +256,11 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5
-      }
+      },
+    addButtonContainer: {
+        alignItems: "stretch",
+        width: "100%"
+    }
 })
 
 export default SongContainer
