@@ -239,6 +239,8 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         borderRadius: 20,
         padding: 35,
+        paddingTop: 20,
+        paddingBottom: 20,
         justifyContent: "center",
         alignItems: "center",
         shadowColor: "#000",

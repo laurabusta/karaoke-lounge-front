@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, StatusBar, Alert, TextInput, Text } from 'react-native'
+import { View, StyleSheet, StatusBar, Alert, TextInput, Text, Pressable } from 'react-native'
 import { Overlay, Input, Card, Button, Icon } from 'react-native-elements'
 import { Modal } from 'react-native-web'
 
@@ -61,54 +61,71 @@ class NewSongForm extends React.Component {
     render () {
         return (
             <View>
-                {/* <Card style={{ width:'100%' }}> */}
-                    {/* <Card.Title>Add New Song</Card.Title> */}
-                    {/* <Input
-                        placeholder='title'
+                <View style={styles.formHeader}>
+                    <Text style={ styles.formHeading }>Add New Song</Text>
+                    {/* Close Modal without submitting data Button */}
+                    <Icon
+                        name='times-circle'
+                        type='font-awesome'
+                        color='#FF0000'
+                        onPress={() => this.props.setModalVisible(false)}
+                        style= { styles.closeIcon }
                     />
-                    <Input
-                        placeholder='artist'
-                    />
-                    <Input
-                        placeholder='song code'
-                    />
-                    <Input
-                        placeholder='image URL'
-                    /> */}
+                </View>
+                {/* Song Title Field */}
+                <View style={ styles.inputContainer } >
+                    <Text>Song Title</Text>
                     <TextInput 
                         onChangeText={ this.handleTitleChange }
-                        placeholder='title'
+                        placeholder='e.g. Rock Lobster'
+                        style={ styles.input }
                     />
+                </View>
+                
+                <View style={ styles.inputContainer } >
+                    <Text>Artist</Text>
                     <TextInput 
                         onChangeText={ this.handleArtistChange }
-                        placeholder='artist'
+                        placeholder='e.g. B-52s'
+                        style={ styles.input }
                     />
+                </View>
+
+                <View style={ styles.inputContainer } >
+                    <Text>Song Code</Text>
                     <TextInput 
                         onChangeText={ this.handleSongCodeChange }
-                        placeholder='song code'
+                        placeholder='input code for karaoke machine'
+                        style={ styles.input }
                     />
+                </View>
+
+                <View style={ styles.inputContainer } >
+                    <Text>Image URL</Text>
                     <TextInput 
                         onChangeText={ this.handleImageURLChange }
-                        placeholder='image URL'
+                        placeholder='URL for image, include http:// or https://'
+                        style={ styles.input }
                     />
-                    <Button
-                        type='clear'
-                        icon={
-                            <Icon 
-                                name='check'
-                                type='font-awesome'
-                                color='#007AFF'
-                            />
+                </View>
+
+                <Button
+                    type='clear'
+                    icon={
+                        <Icon 
+                            name='check'
+                            type='font-awesome'
+                            color='#007AFF'
+                        />
+                    }
+                    title="  Submit"
+                    onPress={ () => {  
+                        // Alert.alert("Add to List?") 
+                        // console.log("Add to List?")
+                        this.onPressAddToList()
                         }
-                        title="  Submit"
-                        onPress={ () => {  
-                            // Alert.alert("Add to List?") 
-                            // console.log("Add to List?")
-                            this.onPressAddToList()
-                            }
-                        }
-                    />
-                {/* </Card> */}
+                    }
+                />
             </View>
         )
     }
@@ -118,8 +135,42 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         // marginTop: StatusBar.currentHeight || 0,
-        alignItems:"stretch",
+        alignItems:"center",
+        justifyContent: "center",
         width:'100%'
+    },
+    input: {
+        height: 40,
+        width: 300,
+        paddingHorizontal: 5,
+        backgroundColor: 'white',
+        marginBottom: 5,
+    },
+    inputContainer: {
+        marginBottom: 20,
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62,
+        elevation: 4,
+    },
+    closeIcon: {
+        alignItems: "flex-end",
+        marginBottom: 5
+    },
+    formHeader: {
+        flexDirection: 'row',
+        alignItems: "flex-start",
+        justifyContent: "space-between"
+    },
+    formHeading: {
+        fontWeight: "bold",
+        fontSize: 24,
+        marginTop: 20,
+        marginBottom: 20
     }
 })
 
