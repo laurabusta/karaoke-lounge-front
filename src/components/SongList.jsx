@@ -23,10 +23,12 @@ class SongList extends React.Component {
                             <Icon 
                                 name='edit'
                                 type='font-awesome'
+                                onPress={ () => { this.props.handleUpdateSong(song) }}
                             />
                             <Icon 
                                 name='trash-o'
                                 type='font-awesome'
+                                onPress={ () => { this.props.deleteSong(song.id) }}
                             />
                         </ListItem>
                     )

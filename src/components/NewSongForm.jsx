@@ -51,8 +51,9 @@ class NewSongForm extends React.Component {
             song_code: this.state.songCode,
             music_brainz_id: ''
         }
-        console.log(newSong)
-        this.props.setModalVisible(false)
+        // console.log(newSong)
+        // this.props.setModalVisible(false)
+        this.props.addSong(newSong)
     }
 
     render () {

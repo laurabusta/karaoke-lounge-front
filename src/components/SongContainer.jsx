@@ -5,6 +5,7 @@ import { Icon, Button } from 'react-native-elements'
 // import Modal from 'modal-react-native-web';
 import SongList from './SongList'
 import NewSongForm from './NewSongForm'
+import UpdateSongForm from './UpdateSongForm'
 
 let baseURL = 'http://localhost:8000/api/v1/songs'
 
@@ -16,10 +17,17 @@ class SongContainer extends React.Component {
             testCount: 0,
             newSongFormVisible: true,
             modalAddToListVisible: false,
+            modalUpdateSongVisible: false,
             showSongList: true,
-            showNewSongForm: false
+            showNewSongForm: false,
+            songToUpdate: {}
         }
         this.setModalVisible = this.setModalVisible.bind(this)
+        this.setUpdateModalVisible = this.setUpdateModalVisible.bind(this)
+        this.getSongs = this.getSongs.bind(this)
+        this.addSong = this.addSong.bind(this)
+        this.deleteSong = this.deleteSong.bind(this)
+        this.handleUpdateSong = this.handleUpdateSong.bind(this)
     }
 
     componentDidMount () {
@@ -65,6 +73,35 @@ class SongContainer extends React.Component {
 
     }
 
+    addSong(song) {
+        console.log(song)
+        fetch(baseURL + '/', {
+            method: 'POST',
+            body: JSON.stringify(song),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then (res => res.json())
+        .then (resJson => {
+            console.log('added song')
+            console.log(resJson)
+            this.getSongs()
+            this.setModalVisible(false)
+        })
+        .catch (error => console.error({'Error': error}))
+    }
+
+    deleteSong(songIndex) {
+        fetch(baseURL + '/' + songIndex, {
+            method: 'DELETE'
+        })
+        .then (res => res.json())
+        .then (resJson => {
+            this.getSongs()
+        })
+    }
+
     setModalVisible(visible) {
         console.log('setModalVisible activated')
         // Alert.alert("setModalVisible activated")
@@ -73,23 +110,28 @@ class SongContainer extends React.Component {
         })
     }
 
-    onPressAddToList() {
-        this.setModalVisible(false)
-        // this.setState({
-        //     showNewSongForm: true,
-        //     showSongList: false
-        // })
+    setUpdateModalVisible(visible) {
+        console.log('setUpdateModalVisible activated')
+        this.setState({
+            modalUpdateSongVisible: visible
+        })
     }
 
+    handleUpdateSong(song) {
+        this.setUpdateModalVisible(true)
+        this.setState({
+            songToUpdate: song
+        })
+    }
 
     render () {
         return (
             <View style={styles.container}>
-                {/* <Text>SongContainer Component is here!</Text>
-                <Text>testCount = { this.state.testCount }</Text> */}
+                
+                {/* Add Song Modal */}
                 <Modal
                     animationType="slide"
-                    transparent={false}
+                    transparent={true}
                     visible={ this.state.modalAddToListVisible }
                     onRequestClose={() => {
                         Alert.alert("Modal has been closed.");
@@ -97,30 +139,37 @@ class SongContainer extends React.Component {
                       }}
                 >
                     <View style={styles.modalView}>
-                        {/* <Text>Hello World!</Text>
-                        <Pressable
-                            style={[styles.button, styles.buttonClose]}
-                            onPress={() => this.setModalVisible(false)}
-                        >
-                            <Text>Hide Modal</Text>
-                        </Pressable> */}
                         <NewSongForm
                             setModalVisible= { this.setModalVisible }
-                            // onPressAddToList = { this.onPressAddToList }
+                            addSong = { this.addSong }
                         />
                     </View>
                 </Modal>
-                {/* <Pressable
-                    style={[styles.button, styles.buttonOpen]}
-                    onPress={() => this.setModalVisible(true)}
+
+                {/* Update Song Modal */}
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={ this.state.modalUpdateSongVisible }
+                    onRequestClose={() => {
+                        Alert.alert("Modal has been closed.")
+                        this.setUpdateModalVisible(!this.state.modalUpdateSongVisible)
+                    }}
                 >
-                    <Text style={styles.textStyle}>Show Modal</Text>
-                </Pressable> */}
+                    <View style={styles.modalView}>
+                        {/* update song form */}
+                        <UpdateSongForm
+                            song = { this.state.songToUpdate }
+                            setUpdateModalVisible = { this.setUpdateModalVisible}
+                        />
+                    </View>
+                </Modal>
                 {
                     this.state.showSongList &&
                     <SongList
                         songs = { this.state.songs }
-                        onPressAddToList = { this.onPressAddToList }
+                        deleteSong = { this.deleteSong }
+                        handleUpdateSong = { this.handleUpdateSong }
                     />
                 }
                 {
@@ -180,10 +229,12 @@ const styles = StyleSheet.create({
         marginTop: 22,
       },
     modalView: {
-        margin: 20,
+        margin: 30,
+        marginTop: 90,
         backgroundColor: "white",
         borderRadius: 20,
         padding: 35,
+        justifyContent: "center",
         alignItems: "center",
         shadowColor: "#000",
         shadowOffset: {
