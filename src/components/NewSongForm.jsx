@@ -9,8 +9,10 @@ class NewSongForm extends React.Component {
         this.state = {
             title: '',
             artist: '',
+            genre: '',
             songCode: '',
-            imageURL: ''
+            imageURL: '',
+            musicBrainzID: ''
         }
         this.handleTitleChange = this.handleTitleChange.bind(this)
         this.handleArtistChange = this.handleArtistChange.bind(this)
@@ -46,10 +48,10 @@ class NewSongForm extends React.Component {
         const newSong = {
             title: this.state.title,
             artist: this.state.artist,
-            genre: '',
+            genre: this.state.genre,
             image: this.state.imageURL,
             song_code: this.state.songCode,
-            music_brainz_id: ''
+            music_brainz_id: this.state.musicBrainzID
         }
         // console.log(newSong)
         // this.props.setModalVisible(false)
