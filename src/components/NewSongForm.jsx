@@ -1,6 +1,6 @@
 import React from 'react'
-import { View, StyleSheet, StatusBar, Alert, TextInput } from 'react-native'
-import { Overlay, Input, Text, Card, Button, Icon } from 'react-native-elements'
+import { View, StyleSheet, StatusBar, Alert, TextInput, Text } from 'react-native'
+import { Overlay, Input, Card, Button, Icon } from 'react-native-elements'
 import { Modal } from 'react-native-web'
 
 class NewSongForm extends React.Component {

@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Pressable, Text, TextInput, Image } from 'react-native'
+import { Button, Icon } from 'react-native-elements'
 
 class UpdateSongForm extends React.Component {
     constructor(props) {
@@ -16,6 +17,7 @@ class UpdateSongForm extends React.Component {
         this.handleArtistChange = this.handleArtistChange.bind(this)
         this.handleSongCodeChange = this.handleSongCodeChange.bind(this)
         this.handleImageURLChange = this.handleImageURLChange.bind(this)
+        this.onPressUpdateSong = this.onPressUpdateSong.bind(this)
     }
 
     handleTitleChange(text) {
@@ -40,6 +42,18 @@ class UpdateSongForm extends React.Component {
         this.setState({
             imageURL: text
         }) 
+    }
+
+    onPressUpdateSong () {
+        const updatedSong = {
+            title: this.state.title,
+            artist: this.state.artist,
+            genre: this.state.genre,
+            image: this.state.imageURL,
+            song_code: this.state.songCode,
+            music_brainz_id: this.state.musicBrainzID
+        }
+        this.props.updateSong(updatedSong)
     }
 
     render() {
@@ -71,6 +85,23 @@ class UpdateSongForm extends React.Component {
                 <Image 
                     source={{uri: this.props.song.image}} 
                     style={{width: 50, height: 50}} 
+                />
+                <Button
+                    type='clear'
+                    icon={
+                        <Icon 
+                            name='check'
+                            type='font-awesome'
+                            color='#007AFF'
+                        />
+                    }
+                    title="  Submit"
+                    onPress={ () => {  
+                        // Alert.alert("Add to List?") 
+                        // console.log("Add to List?")
+                        this.onPressUpdateSong()
+                        }
+                    }
                 />
             </View>
         )

@@ -27,6 +27,7 @@ class SongContainer extends React.Component {
         this.getSongs = this.getSongs.bind(this)
         this.addSong = this.addSong.bind(this)
         this.deleteSong = this.deleteSong.bind(this)
+        this.updateSong = this.updateSong.bind(this)
         this.handleUpdateSong = this.handleUpdateSong.bind(this)
     }
 
@@ -102,6 +103,11 @@ class SongContainer extends React.Component {
         })
     }
 
+    updateSong(song) {
+        console.log(song)
+        this.setUpdateModalVisible(false)
+    }
+
     setModalVisible(visible) {
         console.log('setModalVisible activated')
         // Alert.alert("setModalVisible activated")
@@ -161,6 +167,7 @@ class SongContainer extends React.Component {
                         <UpdateSongForm
                             song = { this.state.songToUpdate }
                             setUpdateModalVisible = { this.setUpdateModalVisible}
+                            updateSong = { this.updateSong }
                         />
                     </View>
                 </Modal>
@@ -192,7 +199,7 @@ class SongContainer extends React.Component {
                         }
                     }
                 />
-                
+
             </View>
         )
     }
