@@ -76,6 +76,7 @@ class SongContainer extends React.Component {
 
     addSong(song) {
         console.log(song)
+        // add an if statement that checks if the image is null, then uses a URL to a default "no image" jpg.
         fetch(baseURL + '/', {
             method: 'POST',
             body: JSON.stringify(song),

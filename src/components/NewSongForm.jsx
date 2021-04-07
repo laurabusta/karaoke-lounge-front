@@ -62,6 +62,7 @@ class NewSongForm extends React.Component {
         return (
             <View>
                 <View style={styles.formHeader}>
+                    {/* Heading for "Add New Song" form */}
                     <Text style={ styles.formHeading }>Add New Song</Text>
                     {/* Close Modal without submitting data Button */}
                     <Icon
@@ -82,6 +83,7 @@ class NewSongForm extends React.Component {
                     />
                 </View>
                 
+                {/* artist form field */}
                 <View style={ styles.inputContainer } >
                     <Text>Artist</Text>
                     <TextInput 
@@ -91,6 +93,7 @@ class NewSongForm extends React.Component {
                     />
                 </View>
 
+                {/* song code form field */}
                 <View style={ styles.inputContainer } >
                     <Text>Song Code</Text>
                     <TextInput 
@@ -100,6 +103,7 @@ class NewSongForm extends React.Component {
                     />
                 </View>
 
+                {/* image URL form field */}
                 <View style={ styles.inputContainer } >
                     <Text>Image URL</Text>
                     <TextInput 

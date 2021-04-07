@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Pressable, Text, TextInput, Image } from 'react-native'
+import { View, Pressable, Text, TextInput, Image, StyleSheet } from 'react-native'
 import { Button, Icon } from 'react-native-elements'
 
 class UpdateSongForm extends React.Component {
@@ -59,33 +59,72 @@ class UpdateSongForm extends React.Component {
     render() {
         return (
             <View>
-                <Pressable onPress={() => this.props.setUpdateModalVisible(false)}>
-                    <Text>Press Me!</Text>
-                </Pressable>
-                <TextInput 
-                    onChangeText={ this.handleTitleChange }
-                    placeholder='title'
-                    value={ this.state.title }
-                />
-                <TextInput 
-                    onChangeText={ this.handleArtistChange }
-                    placeholder='artist'
-                    value={ this.state.artist }
-                />
-                <TextInput 
-                    onChangeText={ this.handleSongCodeChange }
-                    placeholder='song code'
-                    value={ this.state.songCode }
-                />
-                <TextInput 
-                    onChangeText={ this.handleImageURLChange }
-                    placeholder='image URL'
-                    value={ this.state.imageURL }
-                />
-                <Image 
-                    source={{uri: this.props.song.image}} 
-                    style={{width: 50, height: 50}} 
-                />
+                <View style={styles.formHeader}>
+                    {/* Heading for "Edit Song" form */}
+                    <Text style={ styles.formHeading }>Edit Song</Text>
+                    {/* Close Modal without submitting data Button */}
+                    <Icon
+                        name='times-circle'
+                        type='font-awesome'
+                        color='#FF0000'
+                        onPress={() => this.props.setUpdateModalVisible(false)}
+                        style= { styles.closeIcon }
+                    />
+                </View>
+
+                {/* Cover Art Image */}
+                <View style={ styles.coverArtContainer }>
+                    <Image 
+                        source={ { uri: this.props.song.image } } 
+                        style={ { width: 150, height: 150 } } 
+                    />
+                    <Text>Cover Art</Text>
+                </View>
+
+                {/* song title form field */}
+                <View style={ styles.inputContainer }>
+                    <Text>Song Title</Text>
+                    <TextInput 
+                        onChangeText={ this.handleTitleChange }
+                        placeholder='title'
+                        value={ this.state.title }
+                        style={ styles.input }
+                    />
+                </View>
+
+                {/* artist form field */}
+                <View style={ styles.inputContainer }>
+                    <Text>Artist</Text>
+                    <TextInput 
+                        onChangeText={ this.handleArtistChange }
+                        placeholder='artist'
+                        value={ this.state.artist }
+                        style={ styles.input }
+                    />
+                </View>
+
+                {/* song code form field */}
+                <View style={ styles.inputContainer }>
+                    <Text>Song Code</Text>
+                    <TextInput 
+                        onChangeText={ this.handleSongCodeChange }
+                        placeholder='song code'
+                        value={ this.state.songCode }
+                        style={ styles.input }
+                    />
+                </View>
+
+                {/* image URL form field */}
+                <View style={ styles.inputContainer }>
+                    <Text>Cover Art URL</Text>
+                    <TextInput 
+                        onChangeText={ this.handleImageURLChange }
+                        placeholder='image URL'
+                        value={ this.state.imageURL }
+                        style={ styles.input }
+                    />
+                </View>
+
                 <Button
                     type='clear'
                     icon={
@@ -107,5 +146,53 @@ class UpdateSongForm extends React.Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        // marginTop: StatusBar.currentHeight || 0,
+        alignItems:"center",
+        justifyContent: "center",
+        width:'100%'
+    },
+    input: {
+        height: 40,
+        width: 300,
+        paddingHorizontal: 5,
+        backgroundColor: 'white',
+        marginBottom: 5,
+    },
+    inputContainer: {
+        marginBottom: 20,
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62,
+        elevation: 4,
+    },
+    closeIcon: {
+        alignItems: "flex-end",
+        marginBottom: 5
+    },
+    formHeader: {
+        flexDirection: 'row',
+        alignItems: "flex-start",
+        justifyContent: "space-between"
+    },
+    formHeading: {
+        fontWeight: "bold",
+        fontSize: 24,
+        marginTop: 20,
+        marginBottom: 20
+    },
+    coverArtContainer: {
+        alignItems: "center",
+        justifyContent: "center",
+        marginBottom: 20
+    }
+})
 
 export default UpdateSongForm
