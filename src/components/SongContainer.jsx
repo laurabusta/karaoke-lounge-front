@@ -103,9 +103,24 @@ class SongContainer extends React.Component {
         })
     }
 
-    updateSong(song) {
+    updateSong(song, songID) {
         console.log(song)
-        this.setUpdateModalVisible(false)
+        // this.setUpdateModalVisible(false)
+        fetch(baseURL + '/' + songID, {
+            method: 'PUT',
+            body: JSON.stringify(song),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then (res => res.json())
+        .then (resJson => {
+            console.log('updated song')
+            console.log(resJson)
+            this.getSongs()
+            this.setUpdateModalVisible(false)
+        })
+        .catch (error => console.error({'Error': error}))
     }
 
     setModalVisible(visible) {

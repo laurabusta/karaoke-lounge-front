@@ -11,7 +11,7 @@ class UpdateSongForm extends React.Component {
             genre: this.props.song.genre,
             songCode: this.props.song.song_code,
             imageURL: this.props.song.image,
-            musicBrainzID: this.props.song.music_brainz_id
+            musicBrainzID: this.props.song.music_brainz_id,
         }
         this.handleTitleChange = this.handleTitleChange.bind(this)
         this.handleArtistChange = this.handleArtistChange.bind(this)
@@ -53,7 +53,7 @@ class UpdateSongForm extends React.Component {
             song_code: this.state.songCode,
             music_brainz_id: this.state.musicBrainzID
         }
-        this.props.updateSong(updatedSong)
+        this.props.updateSong(updatedSong, this.props.song.id)
     }
 
     render() {
