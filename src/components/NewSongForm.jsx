@@ -105,10 +105,10 @@ class NewSongForm extends React.Component {
 
                 {/* image URL form field */}
                 <View style={ styles.inputContainer } >
-                    <Text>Image URL</Text>
+                    <Text>Cover Art URL</Text>
                     <TextInput 
                         onChangeText={ this.handleImageURLChange }
-                        placeholder='URL for image, include http:// or https://'
+                        placeholder='URL for cover art, include http:// or https://'
                         style={ styles.input }
                     />
                 </View>
