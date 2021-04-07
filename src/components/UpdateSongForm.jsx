@@ -1,13 +1,67 @@
 import React from 'react'
-import { View, Pressable, Text } from 'react-native'
+import { View, Pressable, Text, TextInput } from 'react-native'
 
 class UpdateSongForm extends React.Component {
+    constructor(props) {
+        super (props)
+        this.state = {
+            title: '',
+            artist: '',
+            songCode: '',
+            imageURL: ''
+        }
+        this.handleTitleChange = this.handleTitleChange.bind(this)
+        this.handleArtistChange = this.handleArtistChange.bind(this)
+        this.handleSongCodeChange = this.handleSongCodeChange.bind(this)
+        this.handleImageURLChange = this.handleImageURLChange.bind(this)
+    }
+
+    handleTitleChange(text) {
+        this.setState({
+            title: text
+        })
+    }
+
+    handleArtistChange(text) {
+        this.setState({
+            artist: text
+        })
+    }
+
+    handleSongCodeChange(text) {
+        this.setState({
+            songCode: text
+        })
+    }    
+
+    handleImageURLChange(text) {
+        this.setState({
+            imageURL: text
+        }) 
+    }
+
     render() {
         return (
             <View>
                 <Pressable onPress={() => this.props.setUpdateModalVisible(false)}>
                     <Text>Press Me!</Text>
                 </Pressable>
+                <TextInput 
+                    onChangeText={ this.handleTitleChange }
+                    placeholder='title'
+                />
+                <TextInput 
+                    onChangeText={ this.handleArtistChange }
+                    placeholder='artist'
+                />
+                <TextInput 
+                    onChangeText={ this.handleSongCodeChange }
+                    placeholder='song code'
+                />
+                <TextInput 
+                    onChangeText={ this.handleImageURLChange }
+                    placeholder='image URL'
+                />
             </View>
         )
     }

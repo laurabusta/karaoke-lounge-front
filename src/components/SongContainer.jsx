@@ -164,6 +164,8 @@ class SongContainer extends React.Component {
                         />
                     </View>
                 </Modal>
+
+                {/* Song List */}
                 {
                     this.state.showSongList &&
                     <SongList
@@ -172,10 +174,8 @@ class SongContainer extends React.Component {
                         handleUpdateSong = { this.handleUpdateSong }
                     />
                 }
-                {
-                    this.state.showNewSongForm &&
-                    <NewSongForm />
-                }
+
+                {/* Add to List Button */}
                 <Button
                     icon={
                         <Icon 
@@ -192,24 +192,7 @@ class SongContainer extends React.Component {
                         }
                     }
                 />
-                {/* {
-                    this.state.newSongFormVisible &&
-                    <View style={styles.modalView}>
-                        <Text>Hello World!</Text>
-                        <Pressable
-                            style={[styles.button, styles.buttonClose]}
-                            onPress={() => this.setModalVisible(false)}
-                        >
-                            <Text>Hide Modal</Text>
-                        </Pressable>
-                    </View>
-                } */}
-                {/* <Overlay
-                    isVisible={ true }
-                    ModalComponent={ Modal }
-                >
-                    <Text>Hello World</Text>
-                </Overlay> */}
+                
             </View>
         )
     }
