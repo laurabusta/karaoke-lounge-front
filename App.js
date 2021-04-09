@@ -8,6 +8,9 @@ import Header from './src/components/Header'
 import RegistrationLoginView from './src/components/RegistrationLoginView'
 import LogoutButton from './src/components/LogoutButton'
 import Footer from './src/components/Footer'
+import ActivityLogContainer from './src/components/ActivityLogContainer'
+import UserProfileContainer from './src/components/UserProfileContainer'
+import UsersListContainer from './src/components/UsersListContainer'
 
 const baseURL = 'http://localhost:8000/api/v1'
 const profileRoute = '/profile'
@@ -21,8 +24,11 @@ class App extends React.Component {
       currentUser: {}, // expects object, .data without status info
       modalLoginVisible: false, // delete this no longer needed
       showLogoutButtonView: true, //
-      showRegistrationLoginView: false, //
-      showSongContainer: true, //
+      showRegistrationLoginView: true, //
+      showActivityLogContainer: false,
+      showSongContainer: false, //
+      showUserProfileContainer: false,
+      showUsersListContainer: false,
       showFooter: true //
     }
     this.handleVerifiedUser = this.handleVerifiedUser.bind(this)
@@ -92,10 +98,28 @@ class App extends React.Component {
           />
         }
 
+        {/* render Activity Log Container of all logs */}
+        {
+          this.state.showActivityLogContainer &&
+          <ActivityLogContainer />
+        }
+
         {/* render Songs Container of all songs */}
         { 
           this.state.showSongContainer &&
           <SongContainer />
+        }
+
+        {/* render Users List Container of all users */}
+        {
+          this.state.showUsersListContainer &&
+          <UsersListContainer />
+        }
+
+        {/* render User Profile Container */}
+        {
+          this.state.showUserProfileContainer &&
+          <UserProfileContainer />
         }
 
         {/* render app Footer with navigation buttons */}
