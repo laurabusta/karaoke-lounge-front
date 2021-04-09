@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
-import { ButtonGroup } from 'react-native-elements'
+import { ButtonGroup, Icon } from 'react-native-elements'
 
 class Footer extends React.Component {
     constructor(props) {
@@ -9,6 +9,10 @@ class Footer extends React.Component {
             selectedIndex: 0,
         }
         this.onPressButtonGroup = this.onPressButtonGroup.bind(this)
+        this.iconMusic = this.iconMusic.bind(this)
+        this.iconBook = this.iconBook.bind(this)
+        this.iconUsers = this.iconUsers.bind(this)
+        this.iconUser = this.iconUser.bind(this)
     }
 
     onPressButtonGroup(selectedIndex) {
@@ -33,13 +37,59 @@ class Footer extends React.Component {
         })
     }
 
+    iconBook() {
+        return (
+            <Icon
+                name = 'book'
+                type = 'font-awesome'
+                color = '#DCDCDC'
+            />
+        )
+    } 
+
+    iconMusic() {
+        return (
+            <Icon
+                name = 'music'
+                type = 'font-awesome'
+                color = '#DCDCDC'
+            />
+        )
+    } 
+
+    iconUsers() {
+        return (
+            <Icon
+                name = 'users'
+                type = 'font-awesome'
+                color = '#DCDCDC'
+            />
+        )
+    } 
+
+    iconUser() {
+        return (
+            <Icon
+                name = 'user'
+                type = 'font-awesome'
+                color = '#DCDCDC'
+            />
+        )
+    } 
+        
+
     render() {
         return (
             <View style={styles.container}>
                 <ButtonGroup
                     onPress = { this.onPressButtonGroup }
                     selectedIndex = { this.state.selectedIndex }
-                    buttons = {['logs', 'songs', 'users', 'profile']}
+                    buttons = {[
+                        { element: this.iconBook },
+                        { element: this.iconMusic }, 
+                        { element: this.iconUsers },
+                        { element: this.iconUser }
+                    ]}
                 />
             </View>
         )

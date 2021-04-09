@@ -22,7 +22,8 @@ class App extends React.Component {
       modalLoginVisible: false, // delete this no longer needed
       showLogoutButtonView: true, //
       showRegistrationLoginView: false, //
-      showSongContainer: true //
+      showSongContainer: true, //
+      showFooter: true //
     }
     this.handleVerifiedUser = this.handleVerifiedUser.bind(this)
     this.updateCurrentUser = this.updateCurrentUser.bind(this)
@@ -49,7 +50,8 @@ class App extends React.Component {
       currentUser: {},
       showLogoutButtonView: false,
       showRegistrationLoginView: true,
-      showSongContainer: false
+      showSongContainer: false,
+      showFooter: false
     })
   }
 
@@ -58,6 +60,7 @@ class App extends React.Component {
       showLogoutButtonView: true,
       showRegistrationLoginView: false,
       showSongContainer: true,
+      showFooter: true,
     })
   }
 
@@ -94,8 +97,13 @@ class App extends React.Component {
           this.state.showSongContainer &&
           <SongContainer />
         }
-        <Footer
-        />
+
+        {/* render app Footer with navigation buttons */}
+        {
+          this.state.showFooter &&
+          <Footer />
+        }
+
       </SafeAreaView>
     )
   }
