@@ -15,6 +15,14 @@ class App extends React.Component {
       showRegistrationLoginView: true,
       showSongContainer: false
     }
+    this.handleVerifiedUser = this.handleVerifiedUser.bind(this)
+  }
+
+  handleVerifiedUser(user) {
+    this.setState({
+      showRegistrationLoginView: false,
+      showSongContainer: true
+    })
   }
 
   render () {
@@ -26,7 +34,9 @@ class App extends React.Component {
         {/* render app registration and login view */}
         {
           this.state.showRegistrationLoginView &&
-          <RegistrationLoginView />
+          <RegistrationLoginView 
+            handleVerifiedUser = { this.handleVerifiedUser }
+          />
         }
 
         {/* render Songs Container of all songs */}

@@ -27,7 +27,14 @@ class LoginForm extends React.Component {
     }
 
     onPressLogin() {
-        Alert.alert('login button pressed!')
+        // put user input into userCredentials object format
+        const userCredentials = {
+            email: this.state.email,
+            password: this.state.password
+        }
+        console.log(userCredentials)
+        // pass userCredentials up to connect to backend database
+        this.props.handleLoginRequest(userCredentials)
     }
 
     render () {
@@ -37,7 +44,7 @@ class LoginForm extends React.Component {
                     <Text h2
                         style = { styles.heading }
                     >
-                        Welcome to the Karaoke Lounge! 
+                        Welcome back! 
                     </Text>
                     <Text h5
                         style = { styles.subHeading }
@@ -55,6 +62,7 @@ class LoginForm extends React.Component {
                     style = { styles.inputText }
                     leftIconContainerStyle = { styles.leftIcon }
                     autoCapitalize = { false }
+                    textContentType = "emailAddress"
                     onChangeText = { this.handleEmailChange }
                 />
                 <Input
@@ -68,6 +76,7 @@ class LoginForm extends React.Component {
                     secureTextEntry = { true }
                     style = { styles.inputText }
                     leftIconContainerStyle = { styles.leftIcon }
+                    onChangeText = { this.handlePasswordChange }
                 />
                 <Button 
                     title='Login'
