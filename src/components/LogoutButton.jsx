@@ -2,6 +2,19 @@ import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 
 class LogoutButton extends React.Component {
+    constructor(props) {
+        super(props)
+        this.onPressLogout = this.onPressLogout.bind(this)
+    }
+
+    onPressLogout() {
+        // logout user on backend server
+        // then logout user on frontend
+        fetch(this.props.baseURL + this.props.profileRoute + '/logout', {
+            method: 'POST'
+        })
+    }
+
     render() {
         return (
             <View style={ styles.container }>

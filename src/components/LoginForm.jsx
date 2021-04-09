@@ -79,7 +79,7 @@ class LoginForm extends React.Component {
                     onChangeText = { this.handlePasswordChange }
                 />
                 <Button 
-                    title='Login'
+                    title='Enter'
                     icon = {
                         <Icon 
                             name = 'login'

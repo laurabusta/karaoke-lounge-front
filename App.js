@@ -8,10 +8,15 @@ import Header from './src/components/Header'
 import RegistrationLoginView from './src/components/RegistrationLoginView'
 import LogoutButton from './src/components/LogoutButton'
 
+const baseURL = 'http://localhost:8000/api/v1'
+const profileRoute = '/profile'
+
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      baseURL: baseURL,
+      profileRoute: profileRoute,
       currentUser: {}, // expects object, .data without status info
       modalLoginVisible: false,
       showLogoutButtonView: false,
@@ -21,6 +26,7 @@ class App extends React.Component {
     this.handleVerifiedUser = this.handleVerifiedUser.bind(this)
     this.updateCurrentUser = this.updateCurrentUser.bind(this)
     this.logoutCurrentUser = this.logoutCurrentUser.bind(this)
+    this.viewSongListView = this.viewSongListView.bind(this)
   }
 
   updateCurrentUser(user) {
@@ -33,11 +39,7 @@ class App extends React.Component {
     console.log("verified user")
     console.log(user)
     this.updateCurrentUser(user.data)
-    this.setState({
-      showLogoutButtonView: true,
-      showRegistrationLoginView: false,
-      showSongContainer: true,
-    })
+    this.viewSongListView()
   }
 
   logoutCurrentUser() {
@@ -50,11 +52,21 @@ class App extends React.Component {
     })
   }
 
+  viewSongListView() {
+    this.setState({
+      showLogoutButtonView: true,
+      showRegistrationLoginView: false,
+      showSongContainer: true,
+    })
+  }
+
   render () {
     return (
       <SafeAreaView style={styles.container}>
         {/* render app Header */}
         <Header 
+          baseURL = { this.state.baseURL }
+          profileRoute = { this.state.profileRoute }
           logoutCurrentUser = { this.logoutCurrentUser }
         />
 
