@@ -92,8 +92,8 @@ const styles = StyleSheet.create({
     },
     sectionHeaderContainer: {
         height: 30,
-        marginTop: 15,
-        paddingLeft: 15,
+        // marginTop: 15,
+        paddingHorizontal: 15,
         justifyContent: 'center',
         backgroundColor: '#DCDCDC'
     }

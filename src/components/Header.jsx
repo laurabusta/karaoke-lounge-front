@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, StyleSheet, Image } from 'react-native'
+import LogoutButton from './LogoutButton'
 
 class Header extends React.Component {
     render () {
