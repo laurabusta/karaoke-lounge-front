@@ -45,6 +45,20 @@ class RegistrationLoginView extends React.Component {
     registerNewUser(newUser) {
         console.log('registerNewUser')
         console.log(newUser)
+        fetch(this.props.baseURL + this.props.profileRoute + '/register', {
+            method: 'POST',
+            body: JSON.stringify(newUser),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        })
+        .then(res => res.json())
+        .then(resJson => {
+            console.log("new user checked in!")
+            console.log(resJson)
+            this.props.handleVerifiedUser(resJson)
+        }, err => console.error(err))
     }
 
     viewLoginForm() {
