@@ -11,17 +11,28 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      currentUser: {}, // expects object, .data without status info
       modalLoginVisible: false,
-      showRegistrationLoginView: true,
-      showSongContainer: false
+      showRegistrationLoginView: false,
+      showSongContainer: true
     }
     this.handleVerifiedUser = this.handleVerifiedUser.bind(this)
+    this.updateCurrentUser = this.updateCurrentUser.bind(this)
+  }
+
+  updateCurrentUser(user) {
+    this.setState({
+      currentUser: user // expects object, .data without status info
+    })
   }
 
   handleVerifiedUser(user) {
+    console.log("verified user")
+    console.log(user)
+    this.updateCurrentUser(user.data)
     this.setState({
       showRegistrationLoginView: false,
-      showSongContainer: true
+      showSongContainer: true,
     })
   }
 

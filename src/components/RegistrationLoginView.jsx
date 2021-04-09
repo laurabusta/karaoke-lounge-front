@@ -18,7 +18,7 @@ class RegistrationLoginView extends React.Component {
         // on successful login gets current_user profile (get user function on app.js component), show songs/default start page
         console.log("userCredentials")
         console.log(userCredentials)
-        fetch(baseURL + 'login', {
+        fetch(baseURL + '/login', {
             method: 'POST',
             body: JSON.stringify(userCredentials),
             headers: {

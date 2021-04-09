@@ -61,7 +61,7 @@ class LoginForm extends React.Component {
                     }}
                     style = { styles.inputText }
                     leftIconContainerStyle = { styles.leftIcon }
-                    autoCapitalize = { false }
+                    autoCapitalize = "none"
                     textContentType = "emailAddress"
                     onChangeText = { this.handleEmailChange }
                 />
