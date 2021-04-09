@@ -2,16 +2,49 @@
 
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, Modal } from 'react-native'
 import SongContainer from './src/components/SongContainer'
 import Header from './src/components/Header'
+import RegistrationLoginView from './src/components/RegistrationLoginView'
 
 class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      modalLoginVisible: false,
+      showRegistrationLoginView: true,
+      showSongContainer: false
+    }
+  }
+
   render () {
     return (
       <SafeAreaView style={styles.container}>
+        {/* render app Header */}
         <Header />
-        <SongContainer />
+
+        {/* render app registration and login view */}
+        {
+          this.state.showRegistrationLoginView &&
+          <RegistrationLoginView />
+        }
+
+        {/* render Songs Container of all songs */}
+        { 
+          this.state.showSongContainer &&
+          <SongContainer />
+        }
+
+        {/* registration and login modal */}
+        <View>
+          <Modal
+            animationType = "slide"
+            transparent = { false }
+            visible = { this.state.modalLoginVisible }
+          >
+            <Text>Hello World</Text>
+          </Modal>
+        </View>
       </SafeAreaView>
     )
   }
@@ -24,6 +57,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
 });

@@ -1,6 +1,6 @@
 import React from 'react'
-import { FlatList, SafeAreaView, StyleSheet, StatusBar, View, Text, TouchableHighlight, Image, Alert, ScrollView } from 'react-native'
-import { Icon, Card, ListItem, Button } from 'react-native-elements'
+import { FlatList, SafeAreaView, StyleSheet, StatusBar, View, Text, TouchableHighlight, Alert, ScrollView } from 'react-native'
+import { Icon, Card, ListItem, Button, Image } from 'react-native-elements'
 
 class SongList extends React.Component {
 
@@ -10,7 +10,7 @@ class SongList extends React.Component {
                 <View style={styles.sectionHeaderContainer}>
                     <Text style={styles.sectionHeader}>Karaoke Playlist</Text>
                 </View>
-                {/* <ScrollView> */}
+                <ScrollView>
                 { this.props.songs.map( song => {
                     return (
                         <ListItem key={song.id} bottomDivider>
@@ -36,7 +36,7 @@ class SongList extends React.Component {
                         </ListItem>
                     )
                 })}
-                {/* </ScrollView> */}
+                </ScrollView>
                 {/* <FlatList
                     data={ this.props.songs }
                     renderItem={ ({ item }) => (
@@ -91,11 +91,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     sectionHeaderContainer: {
+        height: 30,
         marginTop: 15,
-        paddingLeft: 13,
-        // padding: 5,
-        // alignItems: 'center',
+        paddingLeft: 15,
         justifyContent: 'center',
+        backgroundColor: '#DCDCDC'
     }
   });
 
