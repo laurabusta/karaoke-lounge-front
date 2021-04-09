@@ -7,6 +7,7 @@ import SongContainer from './src/components/SongContainer'
 import Header from './src/components/Header'
 import RegistrationLoginView from './src/components/RegistrationLoginView'
 import LogoutButton from './src/components/LogoutButton'
+import Footer from './src/components/Footer'
 
 const baseURL = 'http://localhost:8000/api/v1'
 const profileRoute = '/profile'
@@ -18,10 +19,10 @@ class App extends React.Component {
       baseURL: baseURL,
       profileRoute: profileRoute,
       currentUser: {}, // expects object, .data without status info
-      modalLoginVisible: false,
-      showLogoutButtonView: false,
-      showRegistrationLoginView: true,
-      showSongContainer: false
+      modalLoginVisible: false, // delete this no longer needed
+      showLogoutButtonView: true, //
+      showRegistrationLoginView: false, //
+      showSongContainer: true //
     }
     this.handleVerifiedUser = this.handleVerifiedUser.bind(this)
     this.updateCurrentUser = this.updateCurrentUser.bind(this)
@@ -93,17 +94,8 @@ class App extends React.Component {
           this.state.showSongContainer &&
           <SongContainer />
         }
-
-        {/* registration and login modal */}
-        <View>
-          <Modal
-            animationType = "slide"
-            transparent = { false }
-            visible = { this.state.modalLoginVisible }
-          >
-            <Text>Hello World</Text>
-          </Modal>
-        </View>
+        <Footer
+        />
       </SafeAreaView>
     )
   }
