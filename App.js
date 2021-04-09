@@ -82,6 +82,8 @@ class App extends React.Component {
         {
           this.state.showRegistrationLoginView &&
           <RegistrationLoginView 
+            baseURL = { this.state.baseURL }
+            profileRoute = { this.state.profileRoute }
             handleVerifiedUser = { this.handleVerifiedUser }
           />
         }

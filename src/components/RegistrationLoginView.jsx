@@ -4,7 +4,7 @@ import { ButtonGroup } from 'react-native-elements'
 import LoginForm from './LoginForm'
 import RegistrationForm from './RegistrationForm'
 
-let baseURL = 'http://localhost:8000/api/v1/profile'
+// let baseURL = 'http://localhost:8000/api/v1/profile'
 
 class RegistrationLoginView extends React.Component {
     constructor(props) {
@@ -18,6 +18,7 @@ class RegistrationLoginView extends React.Component {
         this.onPressButtonGroup = this.onPressButtonGroup.bind(this)
         this.viewLoginForm = this.viewLoginForm.bind(this)
         this.viewRegistrationForm = this.viewRegistrationForm.bind(this)
+        this.registerNewUser = this.registerNewUser.bind(this)
     }
 
     handleLoginRequest(userCredentials) {
@@ -25,7 +26,7 @@ class RegistrationLoginView extends React.Component {
         // on successful login gets current_user profile (get user function on app.js component), show songs/default start page
         console.log("userCredentials")
         console.log(userCredentials)
-        fetch(baseURL + '/login', {
+        fetch(this.props.baseURL + this.props.profileRoute + '/login', {
             method: 'POST',
             body: JSON.stringify(userCredentials),
             headers: {
@@ -39,6 +40,11 @@ class RegistrationLoginView extends React.Component {
             console.log(resJson)
             this.props.handleVerifiedUser(resJson)
         }, err => console.error(err))
+    }
+
+    registerNewUser(newUser) {
+        console.log('registerNewUser')
+        console.log(newUser)
     }
 
     viewLoginForm() {
@@ -88,6 +94,7 @@ class RegistrationLoginView extends React.Component {
                 {
                     this.state.showRegistrationForm &&
                     <RegistrationForm
+                        registerNewUser = { this.registerNewUser }
                     />
                 }
                 <ButtonGroup
@@ -105,10 +112,10 @@ export default RegistrationLoginView
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
+        flex: 1,
     //   backgroundColor: 'red',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      width: '100%',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%',
     },
   });

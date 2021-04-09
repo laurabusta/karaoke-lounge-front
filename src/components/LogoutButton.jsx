@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     },
     logoutText: {
         color: '#147EFB',
-        fontSize: 16
+        fontSize: 16,
+        fontWeight: 'bold'
     }
 })
