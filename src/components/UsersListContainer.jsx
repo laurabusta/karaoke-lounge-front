@@ -15,6 +15,9 @@ export default UsersListContainer
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'blue'
+        backgroundColor: 'blue',
+        flex: 1,
+        width: '100%',
+        alignItems: 'center',
     }
 })

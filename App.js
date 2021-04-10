@@ -23,18 +23,21 @@ class App extends React.Component {
       profileRoute: profileRoute,
       currentUser: {}, // expects object, .data without status info
       modalLoginVisible: false, // delete this no longer needed
-      showLogoutButtonView: true, //
+      showLogoutButtonView: false, //
       showRegistrationLoginView: true, //
       showActivityLogContainer: false,
       showSongContainer: false, //
       showUserProfileContainer: false,
       showUsersListContainer: false,
-      showFooter: true //
+      showFooter: false //
     }
     this.handleVerifiedUser = this.handleVerifiedUser.bind(this)
     this.updateCurrentUser = this.updateCurrentUser.bind(this)
     this.logoutCurrentUser = this.logoutCurrentUser.bind(this)
-    this.viewSongListView = this.viewSongListView.bind(this)
+    this.viewActivityLogContainer = this.viewActivityLogContainer.bind(this)
+    this.viewSongListContainer = this.viewSongListContainer.bind(this)
+    this.viewUsersListContainer = this.viewUsersListContainer.bind(this)
+    this.viewUserProfileContainer = this.viewUserProfileContainer.bind(this)
   }
 
   updateCurrentUser(user) {
@@ -47,7 +50,7 @@ class App extends React.Component {
     console.log("verified user")
     console.log(user)
     this.updateCurrentUser(user.data)
-    this.viewSongListView()
+    this.viewSongListContainer()
   }
 
   logoutCurrentUser() {
@@ -61,11 +64,50 @@ class App extends React.Component {
     })
   }
 
-  viewSongListView() {
+  viewActivityLogContainer() {
+    this.setState({
+      showLogoutButtonView: true, 
+      showRegistrationLoginView: false, 
+      showActivityLogContainer: true,
+      showSongContainer: false, 
+      showUserProfileContainer: false,
+      showUsersListContainer: false,
+      showFooter: true
+    })
+  }
+
+  viewSongListContainer() {
     this.setState({
       showLogoutButtonView: true,
       showRegistrationLoginView: false,
+      showActivityLogContainer: false,
       showSongContainer: true,
+      showUserProfileContainer: false,
+      showUsersListContainer: false,
+      showFooter: true,
+    })
+  }
+
+  viewUsersListContainer() {
+    this.setState({
+      showLogoutButtonView: true,
+      showRegistrationLoginView: false,
+      showActivityLogContainer: false,
+      showSongContainer: false,
+      showUserProfileContainer: false,
+      showUsersListContainer: true,
+      showFooter: true,
+    })
+  }
+
+  viewUserProfileContainer() {
+    this.setState({
+      showLogoutButtonView: true,
+      showRegistrationLoginView: false,
+      showActivityLogContainer: false,
+      showSongContainer: false,
+      showUserProfileContainer: true,
+      showUsersListContainer: false,
       showFooter: true,
     })
   }
@@ -125,7 +167,12 @@ class App extends React.Component {
         {/* render app Footer with navigation buttons */}
         {
           this.state.showFooter &&
-          <Footer />
+          <Footer 
+            viewActivityLogContainer = { this.viewActivityLogContainer }
+            viewSongListContainer = { this.viewSongListContainer }
+            viewUserProfileContainer = { this.viewUserProfileContainer }
+            viewUsersListContainer = { this.viewUsersListContainer }
+          />
         }
 
       </SafeAreaView>

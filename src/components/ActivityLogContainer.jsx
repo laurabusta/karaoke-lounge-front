@@ -16,5 +16,8 @@ export default ActivityLogContainer
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'yellow',
+        flex: 1,
+        width: '100%',
+        alignItems: 'center',
     }
 })

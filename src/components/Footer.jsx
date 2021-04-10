@@ -19,15 +19,19 @@ class Footer extends React.Component {
         switch(selectedIndex) {
             case 0:
                 console.log('activity log view pressed')
+                this.props.viewActivityLogContainer()
                 break
             case 1:
                 console.log('song list view pressed')
+                this.props.viewSongListContainer()
                 break
             case 2:
                 console.log('users view pressed')
+                this.props.viewUsersListContainer()
                 break
             case 3:
                 console.log('profile view pressed')
+                this.props.viewUserProfileContainer()
                 break
             default:
                 console.log('selected Index does not exist')

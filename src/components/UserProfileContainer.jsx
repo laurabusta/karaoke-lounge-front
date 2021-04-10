@@ -15,6 +15,9 @@ export default UserProfileContainer
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'green'
+        backgroundColor: 'green',
+        flex: 1,
+        width: '100%',
+        alignItems: 'center',
     }
 })
