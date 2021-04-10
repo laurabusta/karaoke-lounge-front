@@ -70,18 +70,11 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       width: '100%',
-      marginTop: StatusBar.currentHeight || 0,
+    //   marginTop: StatusBar.currentHeight || 0,
     //   backgroundColor: 'red',
-      
     },
     item: {
         width: '100%',
-        // backgroundColor: 'red'
-        // flex: 1,
-    //   backgroundColor: '#f9c2ff',
-    //   padding: 20,
-    //   marginVertical: 8,
-    //   marginHorizontal: 16,
     },
     title: {
       fontSize: 32,

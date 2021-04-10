@@ -1,8 +1,7 @@
 import React from 'react'
 import { Text, View, StyleSheet, StatusBar, Pressable, Alert, Modal } from 'react-native'
-import { Icon, Button } from 'react-native-elements'
-// import { Modal } from 'react-native-web'
-// import Modal from 'modal-react-native-web';
+import { Icon, Button, Divider } from 'react-native-elements'
+import ActionButton from 'react-native-action-button'
 import SongList from './SongList'
 import NewSongForm from './NewSongForm'
 import UpdateSongForm from './UpdateSongForm'
@@ -29,6 +28,7 @@ class SongContainer extends React.Component {
         this.deleteSong = this.deleteSong.bind(this)
         this.updateSong = this.updateSong.bind(this)
         this.handleUpdateSong = this.handleUpdateSong.bind(this)
+        this.addSongIcon = this.addSongIcon.bind(this)
     }
 
     componentDidMount () {
@@ -146,6 +146,16 @@ class SongContainer extends React.Component {
         })
     }
 
+    addSongIcon() {
+        return (
+            <Icon 
+                name='add-to-list'
+                type='entypo'
+                color='white'
+            />
+        )
+    }
+
     render () {
         return (
             <View style={styles.container}>
@@ -197,9 +207,9 @@ class SongContainer extends React.Component {
                         handleUpdateSong = { this.handleUpdateSong }
                     />
                 }
-
+                  
                 {/* Add to List Button */}
-                <View style={ styles.addButtonContainer }>
+                {/* <View style={ styles.addButtonContainer }>
                     <Button
                         icon={
                             <Icon 
@@ -216,9 +226,30 @@ class SongContainer extends React.Component {
                             }
                         }
                     />
-                </View>
+                </View> */}
+                
+                {/* <View style={ styles.iconButtonContainer }>
+                    <Icon 
+                        name='add-to-list'
+                        type='entypo'
+                        color='green'
+                        reverse = 'true'
+                        raised = 'true'
+                        style = { styles.iconButton }
+                    />
+                </View> */}
 
-
+                <ActionButton
+                    buttonColor = 'rgb(52,199,89)'
+                    renderIcon = { this.addSongIcon }
+                    onPress={ () => {  
+                        // Alert.alert("Add to List?") 
+                        this.setModalVisible(true)
+                        console.log("Add to List?")
+                        }
+                    }
+                >
+                </ActionButton>
             </View>
         )
     }
@@ -260,6 +291,13 @@ const styles = StyleSheet.create({
     addButtonContainer: {
         alignItems: "stretch",
         width: "100%"
+    },
+    iconButtonContainer: {
+        backgroundColor: 'red',
+        zIndex: 5,
+    },
+    iconButton: {
+        
     }
 })
 
