@@ -26,7 +26,7 @@ class RegistrationLoginView extends React.Component {
         // on successful login gets current_user profile (get user function on app.js component), show songs/default start page
         console.log("userCredentials")
         console.log(userCredentials)
-        fetch(this.props.baseURL + this.props.profileRoute + '/login', {
+        fetch(this.props.baseURL + this.props.apiProfileRoute + '/login', {
             method: 'POST',
             body: JSON.stringify(userCredentials),
             headers: {
@@ -45,7 +45,7 @@ class RegistrationLoginView extends React.Component {
     registerNewUser(newUser) {
         console.log('registerNewUser')
         console.log(newUser)
-        fetch(this.props.baseURL + this.props.profileRoute + '/register', {
+        fetch(this.props.baseURL + this.props.apiProfileRoute + '/register', {
             method: 'POST',
             body: JSON.stringify(newUser),
             headers: {
@@ -96,9 +96,6 @@ class RegistrationLoginView extends React.Component {
     render() {
         return (
             <View style={ styles.container }>
-                <View>
-                    {/* <Text>Welcome to the Karaoke Lounge!</Text> */}
-                </View>
                 {  
                     this.state.showLoginForm &&
                     <LoginForm 
@@ -127,7 +124,7 @@ export default RegistrationLoginView
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-    //   backgroundColor: 'red',
+        // backgroundColor: 'black',
         alignItems: 'center',
         justifyContent: 'space-between',
         width: '100%',

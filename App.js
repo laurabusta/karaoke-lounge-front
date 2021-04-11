@@ -14,14 +14,15 @@ import UserProfileContainer from './src/components/UserProfileContainer'
 import UsersListContainer from './src/components/UsersListContainer'
 
 const baseURL = 'http://localhost:8000/api/v1'
-const profileRoute = '/profile'
+const apiProfileRoute = '/profile'
+const apiSongsRoute = '/songs'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       baseURL: baseURL,
-      profileRoute: profileRoute,
+      apiProfileRoute: apiProfileRoute,
       currentUser: {}, // expects object, .data without status info
       modalLoginVisible: false, // delete this no longer needed
       showLogoutButtonView: false, //
@@ -31,18 +32,15 @@ class App extends React.Component {
       showUserProfileContainer: false,
       showUsersListContainer: false,
       showFooter: false, //
-      index: 0,
-
     }
     this.handleVerifiedUser = this.handleVerifiedUser.bind(this)
     this.updateCurrentUser = this.updateCurrentUser.bind(this)
     this.logoutCurrentUser = this.logoutCurrentUser.bind(this)
+    this.viewRegistrationLogin = this.viewRegistrationLogin.bind(this)
     this.viewActivityLogContainer = this.viewActivityLogContainer.bind(this)
     this.viewSongListContainer = this.viewSongListContainer.bind(this)
     this.viewUsersListContainer = this.viewUsersListContainer.bind(this)
     this.viewUserProfileContainer = this.viewUserProfileContainer.bind(this)
-    // this.setIndex = this.setIndex.bind(this)
-    // this.renderScene = this.renderScene.bind(this)
   }
 
   updateCurrentUser(user) {
@@ -56,24 +54,24 @@ class App extends React.Component {
     console.log(user)
     this.updateCurrentUser(user.data)
     this.viewSongListContainer()
-    // this.setState({
-    //   showLogoutButtonView: true,
-    //   showRegistrationLoginView: false,
-    //   showActivityLogContainer: false,
-    //   showSongContainer: true,
-    //   showUserProfileContainer: false,
-    //   showUsersListContainer: false,
-    //   showFooter: true,
-    // })
   }
 
   logoutCurrentUser() {
     console.log("user logged out!")
+    this.viewRegistrationLogin()
     this.setState({
       currentUser: {},
-      showLogoutButtonView: false,
-      showRegistrationLoginView: true,
-      showSongContainer: false,
+    })
+  }
+
+  viewRegistrationLogin() {
+    this.setState({
+      showLogoutButtonView: false, 
+      showRegistrationLoginView: true, 
+      showActivityLogContainer: false,
+      showSongContainer: false, 
+      showUserProfileContainer: false,
+      showUsersListContainer: false,
       showFooter: false
     })
   }
@@ -88,9 +86,6 @@ class App extends React.Component {
       showUsersListContainer: false,
       showFooter: true
     })
-    // return (
-    //   <ActivityLogContainer />
-    // )
   }
 
   viewSongListContainer() {
@@ -103,9 +98,6 @@ class App extends React.Component {
       showUsersListContainer: false,
       showFooter: true,
     })
-    // return (
-    //   <SongContainer />
-    // )
   }
 
   viewUsersListContainer() {
@@ -118,9 +110,6 @@ class App extends React.Component {
       showUsersListContainer: true,
       showFooter: true,
     })
-    // return (
-    //   <UsersListContainer />
-    // )
   }
 
   viewUserProfileContainer() {
@@ -133,34 +122,13 @@ class App extends React.Component {
       showUsersListContainer: false,
       showFooter: true,
     })
-    // return (
-    //   <UserProfileContainer />
-    // )
   }
-
-  // setIndex(index) {
-  //   this.setState({
-  //     index: index
-  //   })
-  // }
-
-  // renderScene() {
-  //   BottomNavigation.SceneMap({
-  //     logs: this.viewActivityLogContainer,
-  //     songs: this.viewSongListContainer,
-  //     users: this.viewUsersListContainer,
-  //     profile: this.viewUserProfileContainer
-  //   })
-  // }
 
   render () {
     return (
-      // <View style={styles.container}>
       <SafeAreaView style={styles.safeAreaContainer}>
         {/* render app Header */}
         <Header 
-          baseURL = { this.state.baseURL }
-          profileRoute = { this.state.profileRoute }
           logoutCurrentUser = { this.logoutCurrentUser }
         />
 
@@ -168,6 +136,8 @@ class App extends React.Component {
         {
           this.state.showLogoutButtonView &&
           <LogoutButton 
+            baseURL = { this.state.baseURL }
+            apiProfileRoute = { this.state.apiProfileRoute }
             logoutCurrentUser = { this.logoutCurrentUser }
           />
         }
@@ -177,16 +147,10 @@ class App extends React.Component {
           this.state.showRegistrationLoginView &&
           <RegistrationLoginView 
             baseURL = { this.state.baseURL }
-            profileRoute = { this.state.profileRoute }
+            apiProfileRoute = { this.state.apiProfileRoute }
             handleVerifiedUser = { this.handleVerifiedUser }
           />
         }
-
-        {/* <View style={styles.mainAppRouteContainer}> */}
-          
-        {/* </View> */}
-
-        {/* <View> */}
           
         {/* render Activity Log Container of all logs */}
         {
@@ -203,7 +167,10 @@ class App extends React.Component {
         {/* render Users List Container of all users */}
         {
           this.state.showUsersListContainer &&
-          <UsersListContainer />
+          <UsersListContainer 
+            baseURL = { this.state.baseURL }
+            apiProfileRoute = { this.state.apiProfileRoute }
+          />
         }
 
         {/* render User Profile Container */}
@@ -211,8 +178,6 @@ class App extends React.Component {
           this.state.showUserProfileContainer &&
           <UserProfileContainer />
         }
-
-        {/* </View> */}
 
         {/* render app Footer with navigation buttons */}
         {
@@ -224,7 +189,6 @@ class App extends React.Component {
             viewUsersListContainer = { this.viewUsersListContainer }
           />
         }
-
       </SafeAreaView>
     )
   }
@@ -242,16 +206,9 @@ const styles = StyleSheet.create({
   },
   safeAreaContainer: {
     flex: 1,
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
     alignItems: 'center',
     justifyContent: 'flex-start',
     width: '100%',
   },
-  mainAppRouteContainer: {
-    // flex: 1,
-    backgroundColor: 'red',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    width: '100%',
-  }
 });

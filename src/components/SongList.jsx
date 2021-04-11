@@ -11,31 +11,34 @@ class SongList extends React.Component {
                     <Text style={styles.sectionHeader}>Karaoke Playlist</Text>
                 </View>
                 <ScrollView>
-                { this.props.songs.map( song => {
-                    return (
-                        <ListItem key={song.id} bottomDivider>
-                            <Image 
-                                source={{uri: song.image}} 
-                                style={{width: 50, height: 50}} 
-                            />
-                            <ListItem.Content>
-                                <ListItem.Title>{ song.title }</ListItem.Title>
-                                <ListItem.Subtitle>{ song.artist }</ListItem.Subtitle>
-                                <ListItem.Subtitle>{ song.song_code }</ListItem.Subtitle>
-                            </ListItem.Content>
-                            <Icon 
-                                name='edit'
-                                type='font-awesome'
-                                onPress={ () => { this.props.handleUpdateSong(song) }}
-                            />
-                            <Icon 
-                                name='trash-o'
-                                type='font-awesome'
-                                onPress={ () => { this.props.deleteSong(song.id) }}
-                            />
-                        </ListItem>
-                    )
-                })}
+                    { this.props.songs.map( song => {
+                        if (song.image === '') {
+                            song.image = 'https://i.imgur.com/dyGF5Uo.png'
+                          }
+                        return (
+                            <ListItem key={song.id} bottomDivider>
+                                <Image 
+                                    source={{uri: song.image}} 
+                                    style={{width: 50, height: 50}} 
+                                />
+                                <ListItem.Content>
+                                    <ListItem.Title>{ song.title }</ListItem.Title>
+                                    <ListItem.Subtitle>{ song.artist }</ListItem.Subtitle>
+                                    <ListItem.Subtitle>{ song.song_code }</ListItem.Subtitle>
+                                </ListItem.Content>
+                                <Icon 
+                                    name='edit'
+                                    type='font-awesome'
+                                    onPress={ () => { this.props.handleUpdateSong(song) }}
+                                />
+                                <Icon 
+                                    name='trash-o'
+                                    type='font-awesome'
+                                    onPress={ () => { this.props.deleteSong(song.id) }}
+                                />
+                            </ListItem>
+                        )
+                    })}
                 </ScrollView>
                 {/* <FlatList
                     data={ this.props.songs }

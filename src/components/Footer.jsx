@@ -7,7 +7,7 @@ class Footer extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            selectedIndex: 0,
+            selectedIndex: 1,
             routes: [
                 { key: 'music', title: 'Music', icon: 'queue-music'},
                 { key: 'albums', title: 'Albums', icon: 'album' },

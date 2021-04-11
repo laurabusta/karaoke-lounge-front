@@ -10,7 +10,7 @@ class LogoutButton extends React.Component {
     onPressLogout() {
         // logout user on backend server
         // then logout user on frontend
-        fetch(this.props.baseURL + this.props.profileRoute + '/logout', {
+        fetch(this.props.baseURL + this.props.apiProfileRoute + '/logout', {
             method: 'POST'
         })
     }

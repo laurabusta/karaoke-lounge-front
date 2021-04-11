@@ -66,7 +66,7 @@ class SongContainer extends React.Component {
             this.setState({
                 songs: json.data,
                 testCount: this.state.testCount + 1,
-                modalVisible: false
+                // modalVisible: false
             })
         } catch (err) {
             console.log(err)
@@ -78,6 +78,9 @@ class SongContainer extends React.Component {
     addSong(song) {
         console.log(song)
         // add an if statement that checks if the image is null, then uses a URL to a default "no image" jpg.
+        if (song.song_code === '') {
+            song.song_code = '------'
+        }
         fetch(baseURL + '/', {
             method: 'POST',
             body: JSON.stringify(song),
@@ -226,17 +229,6 @@ class SongContainer extends React.Component {
                             console.log("Add to List?")
                             }
                         }
-                    />
-                </View> */}
-                
-                {/* <View style={ styles.iconButtonContainer }>
-                    <Icon 
-                        name='add-to-list'
-                        type='entypo'
-                        color='green'
-                        reverse = 'true'
-                        raised = 'true'
-                        style = { styles.iconButton }
                     />
                 </View> */}
 
