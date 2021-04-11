@@ -3,6 +3,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Modal } from 'react-native'
+import { BottomNavigation } from 'react-native-paper'
 import SongContainer from './src/components/SongContainer'
 import Header from './src/components/Header'
 import RegistrationLoginView from './src/components/RegistrationLoginView'
@@ -29,7 +30,9 @@ class App extends React.Component {
       showSongContainer: false, //
       showUserProfileContainer: false,
       showUsersListContainer: false,
-      showFooter: false //
+      showFooter: false, //
+      index: 0,
+
     }
     this.handleVerifiedUser = this.handleVerifiedUser.bind(this)
     this.updateCurrentUser = this.updateCurrentUser.bind(this)
@@ -38,6 +41,8 @@ class App extends React.Component {
     this.viewSongListContainer = this.viewSongListContainer.bind(this)
     this.viewUsersListContainer = this.viewUsersListContainer.bind(this)
     this.viewUserProfileContainer = this.viewUserProfileContainer.bind(this)
+    // this.setIndex = this.setIndex.bind(this)
+    // this.renderScene = this.renderScene.bind(this)
   }
 
   updateCurrentUser(user) {
@@ -51,6 +56,15 @@ class App extends React.Component {
     console.log(user)
     this.updateCurrentUser(user.data)
     this.viewSongListContainer()
+    // this.setState({
+    //   showLogoutButtonView: true,
+    //   showRegistrationLoginView: false,
+    //   showActivityLogContainer: false,
+    //   showSongContainer: true,
+    //   showUserProfileContainer: false,
+    //   showUsersListContainer: false,
+    //   showFooter: true,
+    // })
   }
 
   logoutCurrentUser() {
@@ -74,6 +88,9 @@ class App extends React.Component {
       showUsersListContainer: false,
       showFooter: true
     })
+    // return (
+    //   <ActivityLogContainer />
+    // )
   }
 
   viewSongListContainer() {
@@ -86,6 +103,9 @@ class App extends React.Component {
       showUsersListContainer: false,
       showFooter: true,
     })
+    // return (
+    //   <SongContainer />
+    // )
   }
 
   viewUsersListContainer() {
@@ -98,6 +118,9 @@ class App extends React.Component {
       showUsersListContainer: true,
       showFooter: true,
     })
+    // return (
+    //   <UsersListContainer />
+    // )
   }
 
   viewUserProfileContainer() {
@@ -110,11 +133,30 @@ class App extends React.Component {
       showUsersListContainer: false,
       showFooter: true,
     })
+    // return (
+    //   <UserProfileContainer />
+    // )
   }
+
+  // setIndex(index) {
+  //   this.setState({
+  //     index: index
+  //   })
+  // }
+
+  // renderScene() {
+  //   BottomNavigation.SceneMap({
+  //     logs: this.viewActivityLogContainer,
+  //     songs: this.viewSongListContainer,
+  //     users: this.viewUsersListContainer,
+  //     profile: this.viewUserProfileContainer
+  //   })
+  // }
 
   render () {
     return (
-      <SafeAreaView style={styles.container}>
+      // <View style={styles.container}>
+      <SafeAreaView style={styles.safeAreaContainer}>
         {/* render app Header */}
         <Header 
           baseURL = { this.state.baseURL }
@@ -140,6 +182,12 @@ class App extends React.Component {
           />
         }
 
+        {/* <View style={styles.mainAppRouteContainer}> */}
+          
+        {/* </View> */}
+
+        {/* <View> */}
+          
         {/* render Activity Log Container of all logs */}
         {
           this.state.showActivityLogContainer &&
@@ -163,6 +211,8 @@ class App extends React.Component {
           this.state.showUserProfileContainer &&
           <UserProfileContainer />
         }
+
+        {/* </View> */}
 
         {/* render app Footer with navigation buttons */}
         {
@@ -188,5 +238,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    width: '100%',
   },
+  safeAreaContainer: {
+    flex: 1,
+    backgroundColor: 'red',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    width: '100%',
+  },
+  mainAppRouteContainer: {
+    // flex: 1,
+    backgroundColor: 'red',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    width: '100%',
+  }
 });

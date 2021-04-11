@@ -1,12 +1,18 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import { ButtonGroup, Icon } from 'react-native-elements'
+import { BottomNavigation } from 'react-native-paper'
 
 class Footer extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             selectedIndex: 0,
+            routes: [
+                { key: 'music', title: 'Music', icon: 'queue-music'},
+                { key: 'albums', title: 'Albums', icon: 'album' },
+                { key: 'recents', title: 'Recents', icon: 'history' }
+            ]
         }
         this.onPressButtonGroup = this.onPressButtonGroup.bind(this)
         this.iconMusic = this.iconMusic.bind(this)
@@ -94,6 +100,14 @@ class Footer extends React.Component {
                         { element: this.iconUser }
                     ]}
                 />
+                {/* <BottomNavigation 
+                    navigationState={
+                        {index: this.state.selectedIndex,
+                        routes: this.state.routes}
+                    }
+                    onIndexChange={ this.onPressButtonGroup }
+                    renderScene= { this.renderScene }
+                /> */}
             </View>
         )
     }

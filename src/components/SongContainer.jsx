@@ -1,7 +1,8 @@
 import React from 'react'
 import { Text, View, StyleSheet, StatusBar, Pressable, Alert, Modal } from 'react-native'
 import { Icon, Button, Divider } from 'react-native-elements'
-import ActionButton from 'react-native-action-button'
+import { ActionButton } from 'react-native-action-button'
+import { FAB } from 'react-native-paper'
 import SongList from './SongList'
 import NewSongForm from './NewSongForm'
 import UpdateSongForm from './UpdateSongForm'
@@ -239,7 +240,7 @@ class SongContainer extends React.Component {
                     />
                 </View> */}
 
-                <ActionButton
+                {/* <ActionButton
                     buttonColor = 'rgb(52,199,89)'
                     renderIcon = { this.addSongIcon }
                     onPress={ () => {  
@@ -249,7 +250,17 @@ class SongContainer extends React.Component {
                         }
                     }
                 >
-                </ActionButton>
+                </ActionButton> */}
+                <FAB
+                    style={styles.fab}
+                    large
+                    icon="plus"
+                    onPress={() => {
+                        this.setModalVisible(true)
+                        console.log("Add to List?")
+                    }}
+                />
+
             </View>
         )
     }
@@ -296,9 +307,12 @@ const styles = StyleSheet.create({
         backgroundColor: 'red',
         zIndex: 5,
     },
-    iconButton: {
-        
-    }
+    fab: {
+        position: 'absolute',
+        margin: 16,
+        right: 0,
+        bottom: 0,
+    },
 })
 
 export default SongContainer
