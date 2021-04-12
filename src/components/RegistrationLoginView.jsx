@@ -36,11 +36,7 @@ class RegistrationLoginView extends React.Component {
             },
             credentials: 'include'
         })
-        .then(res => {
-            console.log("received response from backend post")
-            console.log(res)
-            res.json()
-        })
+        .then(res => res.json())
         .then(resJson => {
             console.log("user logged in!")
             console.log(resJson)
