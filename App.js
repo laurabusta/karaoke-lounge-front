@@ -176,7 +176,9 @@ class App extends React.Component {
         {/* render User Profile Container */}
         {
           this.state.showUserProfileContainer &&
-          <UserProfileContainer />
+          <UserProfileContainer 
+            profile = { this.state.currentUser }
+          />
         }
 
         {/* render app Footer with navigation buttons */}
