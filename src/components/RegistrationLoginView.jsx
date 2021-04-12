@@ -26,6 +26,8 @@ class RegistrationLoginView extends React.Component {
         // on successful login gets current_user profile (get user function on app.js component), show songs/default start page
         console.log("userCredentials")
         console.log(userCredentials)
+        // const apiURL = this.props.baseURL + this.props.apiProfileRoute + '/login'
+        // console.log(apiURL)
         fetch(this.props.baseURL + this.props.apiProfileRoute + '/login', {
             method: 'POST',
             body: JSON.stringify(userCredentials),
@@ -34,7 +36,11 @@ class RegistrationLoginView extends React.Component {
             },
             credentials: 'include'
         })
-        .then(res => res.json())
+        .then(res => {
+            console.log("received response from backend post")
+            console.log(res)
+            res.json()
+        })
         .then(resJson => {
             console.log("user logged in!")
             console.log(resJson)

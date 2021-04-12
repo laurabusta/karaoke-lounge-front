@@ -51,7 +51,7 @@ class App extends React.Component {
 
   handleVerifiedUser(user) {
     console.log("verified user")
-    console.log(user)
+    console.log(user.data)
     this.updateCurrentUser(user.data)
     this.viewSongListContainer()
   }
