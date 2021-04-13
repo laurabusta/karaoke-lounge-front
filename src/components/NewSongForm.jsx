@@ -73,6 +73,7 @@ class NewSongForm extends React.Component {
                         style= { styles.closeIcon }
                     />
                 </View>
+                
                 {/* Song Title Field */}
                 <View style={ styles.inputContainer } >
                     <Text>Song Title</Text>

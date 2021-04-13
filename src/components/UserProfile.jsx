@@ -47,9 +47,9 @@ class UserProfile extends React.Component {
                 <View style={styles.profileContainer}>
                     <View style={styles.avatarContainer}>
                         <Avatar 
-                        source={{ uri: profile_pic_URL }}
-                        rounded
-                        size={100}
+                            source={{ uri: profile_pic_URL }}
+                            rounded
+                            size={100}
                         />
                     </View>
                     <View style={styles.profileContentContainer}>

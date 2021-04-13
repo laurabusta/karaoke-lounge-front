@@ -57,6 +57,13 @@ class UpdateSongForm extends React.Component {
     }
 
     render() {
+        // set default image if URl is ""
+        let coverArtURL = this.props.song.image
+        if (coverArtURL === '') {
+            coverArtURL = 'https://i.imgur.com/dyGF5Uo.png'
+        }
+        console.log(coverArtURL)
+        
         return (
             <View>
                 <View style={styles.formHeader}>
@@ -75,7 +82,7 @@ class UpdateSongForm extends React.Component {
                 {/* Cover Art Image */}
                 <View style={ styles.coverArtContainer }>
                     <Image 
-                        source={ { uri: this.props.song.image } } 
+                        source={ { uri: coverArtURL } } 
                         style={ { width: 150, height: 150 } } 
                     />
                     <Text>Cover Art</Text>
