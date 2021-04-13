@@ -9,6 +9,7 @@ class UserProfileContainer extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            profile: this.props.profile,
             modalUpdateProfileVisible: false,
         }
         this.setModalVisible = this.setModalVisible.bind(this)
@@ -24,7 +25,25 @@ class UserProfileContainer extends React.Component {
 
     updateProfile(updatedProfile, profileID) {
         console.log('updateProfile')
-        this.setModalVisible(false)
+        const apiURL = this.props.baseURL + this.props.apiProfileRoute + '/' + profileID
+        fetch(apiURL, {
+            method: 'PUT',
+            body: JSON.stringify(updatedProfile),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then (res => res.json())
+        .then (resJson => {
+            console.log('updated song')
+            console.log(resJson)
+            this.setState({
+                profile: resJson.data
+            })
+            this.props.updateCurrentUser(resJson.data)
+            this.setModalVisible(false)
+        })
+        .catch (error => console.error({'Error': error}))
     }
 
     render() {
@@ -38,7 +57,7 @@ class UserProfileContainer extends React.Component {
                 <UserProfile 
                     baseURL = { this.props.baseURL }
                     apiSongsRoute = { this.props.apiSongsRoute }
-                    profile = { this.props.profile }
+                    profile = { this.state.profile }
                 />
                 <Button 
                     title = '  Edit Profile'

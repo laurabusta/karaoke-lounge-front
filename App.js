@@ -179,7 +179,9 @@ class App extends React.Component {
           <UserProfileContainer 
             baseURL = { baseURL }
             apiSongsRoute = { apiSongsRoute }
+            apiProfileRoute = { apiProfileRoute }
             profile = { this.state.currentUser }
+            updateCurrentUser = { this.updateCurrentUser }
           />
         }
 
