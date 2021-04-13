@@ -12,6 +12,7 @@ class UserProfileContainer extends React.Component {
             modalUpdateProfileVisible: false,
         }
         this.setModalVisible = this.setModalVisible.bind(this)
+        this.updateProfile = this.updateProfile.bind(this)
     }
 
     setModalVisible(visible) {
@@ -19,6 +20,11 @@ class UserProfileContainer extends React.Component {
         this.setState({
             modalUpdateProfileVisible: visible
         })
+    }
+
+    updateProfile(updatedProfile, profileID) {
+        console.log('updateProfile')
+        this.setModalVisible(false)
     }
 
     render() {
@@ -53,7 +59,7 @@ class UserProfileContainer extends React.Component {
                 />
                 <Modal
                     animationType="slide"
-                    transparent={true}
+                    transparent={false}
                     visible={ this.state.modalUpdateProfileVisible }
                     onRequestClose={() => {
                         Alert.alert("Modal has been closed.")
@@ -64,6 +70,7 @@ class UserProfileContainer extends React.Component {
                         <UpdateProfileForm 
                             profile = { this.props.profile }
                             setModalVisible = { this.setModalVisible }
+                            updateProfile = { this.updateProfile }
                         />
                     </View>
                 </Modal>

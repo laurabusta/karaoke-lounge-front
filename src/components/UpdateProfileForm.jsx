@@ -18,6 +18,16 @@ class UpdateProfileForm extends React.Component {
 
     onPressEditProfile() {
         console.log('onPressEditProfile')
+        const updatedProfile = {
+            username: this.state.username,
+            email: this.state.email,
+            nickname: this.state.nickname,
+            fave_drink: this.state.fave_drink,
+            fave_genre: this.state.fave_genre,
+            profile_pic_URL: this.state.profile_pic_URL,
+        }
+        console.log(updatedProfile)
+        this.props.updateProfile(updatedProfile, this.props.profile.id)
     }
 
     render() {
