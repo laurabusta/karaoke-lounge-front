@@ -7,7 +7,7 @@ class UserProfile extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            songs: []
+            songs: [],
         }
         this.getSongsByUser = this.getSongsByUser.bind(this)
     }

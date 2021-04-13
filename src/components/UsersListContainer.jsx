@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Text, Alert } from 'react-native'
+import UserProfile from './UserProfile'
 import UsersList from './UsersList'
 
 class UsersListContainer extends React.Component {
@@ -7,9 +8,13 @@ class UsersListContainer extends React.Component {
         super(props)
         this.state = {
             users: [],
-            showUsersList: true
+            profile: {},
+            showUsersList: true,
+            showProfile: false
         }
         this.getUsers = this.getUsers.bind(this)
+        this.getUser = this.getUser.bind(this)
+        this.viewUserProfile = this.viewUserProfile.bind(this)
     }
 
     componentDidMount() {
@@ -36,6 +41,37 @@ class UsersListContainer extends React.Component {
         })
     }
 
+    getUser(profileID) {
+        console.log('get one user from backend by id')
+        const apiURL = this.props.baseURL + this.props.apiProfileRoute + '/' + profileID
+        console.log(apiURL)
+        fetch(apiURL, {
+            method: 'GET'
+        })
+        .then(data => data.json())
+        .then(parsedData => {
+            console.log(`parsedData ${parsedData.data}`)
+            this.setState({
+                profile: parsedData.data,
+                showUsersList: false,
+                showProfile: true
+            })
+            console.log(parsedData.data.id)
+        })
+        .catch( () => {
+            console.log(err)
+            Alert.alert('getUser error')
+        })
+    }
+
+    viewUserProfile(profileID) {
+        // this.setState({
+        //     showUsersList: false,
+        //     showProfile: true
+        // })
+        this.getUser(profileID)
+    }
+
     render() {
         return (
             <View style={ styles.container }>
@@ -45,6 +81,16 @@ class UsersListContainer extends React.Component {
                     this.state.showUsersList &&
                     <UsersList
                         users = { this.state.users }
+                        getUser = { this.getUser }
+                        viewUserProfile = { this.viewUserProfile }
+                    />
+                }
+                {
+                    this.state.showProfile &&
+                    <UserProfile
+                        baseURL = { this.props.baseURL }
+                        apiSongsRoute = { this.props.apiSongsRoute }
+                        profile = { this.state.profile }
                     />
                 }
             </View>

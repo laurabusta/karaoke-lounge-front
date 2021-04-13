@@ -170,6 +170,7 @@ class App extends React.Component {
           <UsersListContainer 
             baseURL = { this.state.baseURL }
             apiProfileRoute = { this.state.apiProfileRoute }
+            apiSongsRoute = { apiSongsRoute }
           />
         }
 

@@ -3,6 +3,15 @@ import { StyleSheet, View, Text, ScrollView } from 'react-native'
 import { ListItem, Avatar, Icon } from 'react-native-elements'
 
 class UsersList extends React.Component {
+    constructor(props) {
+        super(props)
+        this.onPressListItem = this.onPressListItem.bind(this)
+    }
+
+    onPressListItem() {
+        console.log('onPressListItem')
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -19,7 +28,14 @@ class UsersList extends React.Component {
                             user.profile_pic_URL = 'https://i.imgur.com/9cUTi1k.png'
                           }
                         return (
-                            <ListItem key={user.id} bottomDivider>
+                            <ListItem 
+                                key={user.id} 
+                                bottomDivider
+                                onPress={ ()=>{
+                                    console.log('pressed list item')
+                                    this.props.viewUserProfile(user.id)
+                                } }
+                            >
                                 <Avatar 
                                     source={{
                                         uri: user.profile_pic_URL
