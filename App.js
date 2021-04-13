@@ -177,6 +177,8 @@ class App extends React.Component {
         {
           this.state.showUserProfileContainer &&
           <UserProfileContainer 
+            baseURL = { baseURL }
+            apiSongsRoute = { apiSongsRoute }
             profile = { this.state.currentUser }
           />
         }

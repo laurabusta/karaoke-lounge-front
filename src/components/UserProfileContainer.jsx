@@ -5,6 +5,7 @@ import UserProfile from './UserProfile'
 import SongList from './SongList'
 
 class UserProfileContainer extends React.Component {
+
     render() {
         return (
             <View style={ styles.container }>
@@ -14,14 +15,11 @@ class UserProfileContainer extends React.Component {
                     <Text style={styles.sectionHeader}>Member Profile</Text>
                 </View>
                 <UserProfile 
+                    baseURL = { this.props.baseURL }
+                    apiSongsRoute = { this.props.apiSongsRoute }
                     profile = { this.props.profile }
                 />
 
-                {/* render section header */}
-                <View style={styles.sectionHeaderContainer}>
-                    <Text style={styles.sectionHeader}>Member Profile</Text>
-                </View>
-                {/* <SongList /> */}
             </View>
             
         )
@@ -32,7 +30,7 @@ export default UserProfileContainer
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'green',
+        // backgroundColor: 'green',
         flex: 1,
         width: '100%',
         // alignItems: 'center',

@@ -1,15 +1,53 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Text, Avatar, Divider, Button } from 'react-native-elements'
+import SongList from './SongList'
 
 class UserProfile extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            songs: []
+        }
+        this.getSongsByUser = this.getSongsByUser.bind(this)
+    }
+
+    componentDidMount() {
+        this.getSongsByUser()
+    }
+
+    getSongsByUser() {
+        const apiURL = this.props.baseURL + this.props.apiSongsRoute + '/user/' + this.props.profile.id
+        console.log(apiURL)
+        fetch(apiURL, {
+            method: 'GET'
+        })
+        .then(data => {
+            return data.json()
+        }, err => console.log(err))
+        .then(parsedData => {
+            console.log(`parsedData ${parsedData.data}`)
+            this.setState({
+                songs: parsedData.data
+            })
+        })
+        .catch( () => {
+            console.log(err)
+            Alert.alert('getUsers error')
+        })
+    }
+
     render() {
+        let profile_pic_URL = this.props.profile.profile_pic_URL
+        if (profile_pic_URL === "") {
+            profile_pic_URL = 'https://i.imgur.com/9cUTi1k.png'
+        }
         return (
             <View style={styles.container}>
                 <View style={styles.profileContainer}>
                     <View style={styles.avatarContainer}>
                         <Avatar 
-                        source={{ uri: this.props.profile.profile_pic_URL }}
+                        source={{ uri: profile_pic_URL }}
                         rounded
                         size={100}
                         />
@@ -22,7 +60,9 @@ class UserProfile extends React.Component {
                         <Text h5>drink order:  { this.props.profile.fave_drink }</Text>
                     </View>
                 </View>
-                
+                <SongList 
+                    songs = { this.state.songs }
+                />
             </View>
         )
     }
@@ -38,7 +78,7 @@ const styles=StyleSheet.create({
     },
     profileContainer: {
         flexDirection: 'row',
-        backgroundColor: 'yellow',
+        // backgroundColor: 'yellow',
         alignItems: 'center',
         // padding: 20,
         margin: 20
