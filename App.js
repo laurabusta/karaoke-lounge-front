@@ -171,6 +171,7 @@ class App extends React.Component {
             baseURL = { this.state.baseURL }
             apiProfileRoute = { this.state.apiProfileRoute }
             apiSongsRoute = { apiSongsRoute }
+            currentUser = { this.state.currentUser }
           />
         }
 

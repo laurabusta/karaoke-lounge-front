@@ -8,7 +8,7 @@ class UsersListContainer extends React.Component {
         super(props)
         this.state = {
             users: [],
-            profile: {},
+            profile: this.props.currentUser,
             showUsersList: true,
             showProfile: false
         }
@@ -19,6 +19,7 @@ class UsersListContainer extends React.Component {
 
     componentDidMount() {
         this.getUsers()
+        // this.getUser(this.props.currentUser.id)
     }
 
     getUsers() {
@@ -43,20 +44,21 @@ class UsersListContainer extends React.Component {
 
     getUser(profileID) {
         console.log('get one user from backend by id')
+        console.log(profileID)
         const apiURL = this.props.baseURL + this.props.apiProfileRoute + '/' + profileID
         console.log(apiURL)
         fetch(apiURL, {
             method: 'GET'
         })
-        .then(data => data.json())
+        .then(data => data.json(), err => console.log(err))
+        // .then(parsedData => console.log(parsedData.data[0].id))
         .then(parsedData => {
-            console.log(`parsedData ${parsedData.data}`)
+            console.log(parsedData.data[0])
             this.setState({
-                profile: parsedData.data,
-                showUsersList: false,
-                showProfile: true
+                profile: parsedData.data[0],
+                // showUsersList: false,
+                // showProfile: true
             })
-            console.log(parsedData.data.id)
         })
         .catch( () => {
             console.log(err)
@@ -64,12 +66,14 @@ class UsersListContainer extends React.Component {
         })
     }
 
-    viewUserProfile(profileID) {
-        // this.setState({
-        //     showUsersList: false,
-        //     showProfile: true
-        // })
-        this.getUser(profileID)
+    viewUserProfile(user) {
+        this.setState({
+            showUsersList: false,
+            showProfile: true
+        })
+        console.log(user)
+        console.log(user.id)
+        this.getUser(user.id)
     }
 
     render() {
@@ -102,7 +106,7 @@ export default UsersListContainer
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'blue',
+        // backgroundColor: 'blue',
         flex: 1,
         width: '100%',
         alignItems: 'center',

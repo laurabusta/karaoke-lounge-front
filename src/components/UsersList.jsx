@@ -33,7 +33,7 @@ class UsersList extends React.Component {
                                 bottomDivider
                                 onPress={ ()=>{
                                     console.log('pressed list item')
-                                    this.props.viewUserProfile(user.id)
+                                    this.props.viewUserProfile(user)
                                 } }
                             >
                                 <Avatar 
