@@ -8,6 +8,7 @@ class UserProfile extends React.Component {
         super(props)
         this.state = {
             songs: [],
+            profile: this.props.profile 
         }
         this.getSongsByUser = this.getSongsByUser.bind(this)
     }
@@ -16,8 +17,22 @@ class UserProfile extends React.Component {
         this.getSongsByUser()
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        console.log('componentDidUpdate')
+        console.log(`this.props.profile ${this.props.profile.username}`)
+        console.log(`prevState.profile ${prevState.profile.username}`)
+        if (prevState.profile != this.props.profile) {
+            this.getSongsByUser()
+            console.log('profile did update')
+            this.setState({
+                profile: this.props.profile
+            })
+        }
+
+    }
+
     getSongsByUser() {
-        const apiURL = this.props.baseURL + this.props.apiSongsRoute + '/user/' + this.props.profile.id
+        const apiURL = this.props.baseURL + this.props.apiSongsRoute + '/user/' + this.state.profile.id
         console.log(apiURL)
         fetch(apiURL, {
             method: 'GET'
@@ -38,7 +53,7 @@ class UserProfile extends React.Component {
     }
 
     render() {
-        let profile_pic_URL = this.props.profile.profile_pic_URL
+        let profile_pic_URL = this.state.profile.profile_pic_URL
         if (profile_pic_URL === "") {
             profile_pic_URL = 'https://i.imgur.com/9cUTi1k.png'
         }
@@ -53,11 +68,11 @@ class UserProfile extends React.Component {
                         />
                     </View>
                     <View style={styles.profileContentContainer}>
-                        <Text h3>{ this.props.profile.username }</Text>
-                        <Text h4>"{ this.props.profile.nickname }"</Text>
+                        <Text h3>{ this.state.profile.username }</Text>
+                        <Text h4>"{ this.state.profile.nickname }"</Text>
                         <Divider style={styles.divider} />
-                        <Text h5>go-to genre:  { this.props.profile.fave_genre }</Text>
-                        <Text h5>drink order:  { this.props.profile.fave_drink }</Text>
+                        <Text h5>go-to genre:  { this.state.profile.fave_genre }</Text>
+                        <Text h5>drink order:  { this.state.profile.fave_drink }</Text>
                     </View>
                 </View>
                 <SongList 
